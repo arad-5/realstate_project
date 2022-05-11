@@ -6,4 +6,10 @@
     .property-card:hover .property-card-image {
         @apply -translate-y-2 shadow-md;
     }
+
+    .swiper-pagination-bullet {
+        background-color: #fff;
+        color: #fff;
+        display: none !important;
+    }
 }

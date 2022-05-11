@@ -1,12 +1,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { User } from '@nextui-org/react';
 
 import { FaBed, FaBath } from 'react-icons/fa';
 import { MdCalendarViewMonth, MdVerified } from 'react-icons/md';
 import { IoLocationSharp } from 'react-icons/io5';
 
-const Property = ({
+const PropertyCard = ({
     property: {
         coverPhoto,
         price,
@@ -21,7 +20,7 @@ const Property = ({
     },
 }) => {
     return (
-        <Link href={`/property/${externalID}`} passHref>
+        <Link href={`/property?id=${externalID}`} passHref>
             <div className='property-card z-10 cursor-pointer rounded-xl border bg-white p-3 transition dark:border-[#404040] dark:bg-[#202020] sm:mt-20 sm:flex-col sm:rounded-2xl sm:shadow-lg sm:hover:-translate-y-3 sm:hover:shadow-xl'>
                 <div className='flex justify-between sm:block'>
                     <div className='property-card-image relative mb-3 h-28 w-1/3 rounded-2xl transition sm:-mt-20 sm:h-48 sm:w-full'>
@@ -80,4 +79,4 @@ const Property = ({
     );
 };
 
-export default Property;
+export default PropertyCard;

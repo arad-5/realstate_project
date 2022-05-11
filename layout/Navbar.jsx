@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { React } from '@nextui-org/react';
 
 import { DarkmodeSwitch } from '.';
+import { useRouter } from 'next/router';
 
 const Navbar = () => {
     const [toggleNavbar, setToggleNavbar] = useState();
@@ -13,19 +14,19 @@ const Navbar = () => {
             setToggleNavbar(false);
         }
     };
-
+    
     useEffect(() => {
         scrollHandler();
         window.addEventListener('scroll', scrollHandler);
     }, []);
-
+    const { pathname } = useRouter();
     return (
         <nav
-            className={`fixed left-0 top-0 z-30 h-16 w-screen -translate-y-full dark:border-black border-b dark:bg-black/40 bg-white/40 px-6 backdrop-blur-lg transition-transform ${
-                toggleNavbar && 'translate-y-0'
+            className={`fixed left-0 top-0 z-30 h-16 w-screen -translate-y-full border-b bg-white/40 px-6 backdrop-blur-lg transition-transform dark:border-black dark:bg-black/40 ${
+                toggleNavbar || (pathname === '/property' && 'translate-y-0')
             }`}
         >
-            <div className='container mx-auto flex h-full items-center justify-between max-w-7xl'>
+            <div className='container mx-auto flex h-full max-w-7xl items-center justify-between'>
                 <div className='flex items-center'>
                     <Link href='/' passHref>
                         <svg

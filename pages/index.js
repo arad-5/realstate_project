@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Container } from '@nextui-org/react';
 import { baseURL, fetchAPI } from '../utils/fetchAPI';
-import Property from '../components/Property';
+import PropertyCard from '../components/PropertyCard';
 import { DarkmodeSwitch } from '../layout';
 
 export default function Home({ propertiesForSale, propertiesForRent }) {
@@ -41,7 +41,7 @@ export default function Home({ propertiesForSale, propertiesForRent }) {
                         </h1>
                     </div>
                     {propertiesForSale.map((property) => (
-                        <Property property={property} key={property.id} />
+                        <PropertyCard property={property} key={property.id} />
                     ))}
                 </div>
             </section>
@@ -63,7 +63,7 @@ export default function Home({ propertiesForSale, propertiesForRent }) {
                         </h1>
                     </div>
                     {propertiesForRent.map((property) => (
-                        <Property property={property} key={property.id} />
+                        <PropertyCard property={property} key={property.id} />
                     ))}
                 </div>
             </section>

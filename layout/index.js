@@ -115,7 +115,7 @@ export const SunIcon = ({
 
 export const DarkmodeSwitch = () => {
     const { setTheme, resolvedTheme } = useTheme();
-    console.log(resolvedTheme);
+    
     return (
         <Switch
             className='ml-4 text-blue-500 dark:text-black'
