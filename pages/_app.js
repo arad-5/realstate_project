@@ -1,18 +1,20 @@
-import '../styles/globals.css'
+import '../styles/globals.css';
 
-// 1. import `NextUIProvider` component
-import { NextUIProvider } from '@nextui-org/react'
-import Layout from '../layout'
+import { NextUIProvider } from '@nextui-org/react';
+import Layout from '../layout';
+import { ThemeProvider } from 'next-themes';
 
 function MyApp({ Component, pageProps }) {
     return (
         // 2. Use at the root of your app
         <NextUIProvider>
-            <Layout>
+            <ThemeProvider attribute='class'>
+                <Layout>
                     <Component {...pageProps} />
-            </Layout>
+                </Layout>
+            </ThemeProvider>
         </NextUIProvider>
-    )
+    );
 }
 
-export default MyApp
+export default MyApp;

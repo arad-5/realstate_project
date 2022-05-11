@@ -22,9 +22,9 @@ const Property = ({
 }) => {
     return (
         <Link href={`/property/${externalID}`} passHref>
-            <div className='cursor-pointer rounded-xl border p-3 sm:mt-20 sm:flex-col sm:rounded-2xl sm:shadow-lg bg-white z-10'>
+            <div className='property-card z-10 cursor-pointer rounded-xl border bg-white p-3 transition dark:border-[#404040] dark:bg-[#202020] sm:mt-20 sm:flex-col sm:rounded-2xl sm:shadow-lg sm:hover:-translate-y-3 sm:hover:shadow-xl'>
                 <div className='flex justify-between sm:block'>
-                    <div className='relative mb-3 h-28 w-1/3 sm:-mt-20 sm:h-48 sm:w-full'>
+                    <div className='property-card-image relative mb-3 h-28 w-1/3 rounded-2xl transition sm:-mt-20 sm:h-48 sm:w-full'>
                         {coverPhoto && (
                             <Image
                                 src={coverPhoto.url}
@@ -37,32 +37,32 @@ const Property = ({
                     <div className='relative my-1 ml-4 w-2/3 overflow-auto sm:ml-0 sm:h-24 sm:w-full'>
                         <h2>{title.slice(0, 50)}</h2>
                         <div className='mt-2 flex items-start'>
-                            <IoLocationSharp className='mt-1 text-xl' />
+                            <IoLocationSharp className='mt-1 text-xl text-blue-600' />
                             <span>{`${location[2].name}`}</span>
                         </div>
                     </div>
                 </div>
                 <div className='flex justify-between'>
-                    <div className='space-x-2 space-y-1'>
-                        <span className='inline-flex items-center rounded-full border px-3 py-1'>
+                    <div className='space-x-2 space-y-1 text-gray-600 dark:text-gray-300'>
+                        <span className='inline-flex items-center rounded-full border px-3 py-1 dark:border-[#404040]'>
                             <MdCalendarViewMonth className='mr-2' />
                             {Math.round(area)} m<sup>2</sup>
                         </span>
-                        <span className='inline-flex items-center rounded-full border px-3 py-1'>
+                        <span className='inline-flex items-center rounded-full border px-3 py-1 dark:border-[#404040]'>
                             <FaBed className='mr-2' />
                             {rooms}
                         </span>
-                        <span className='inline-flex items-center rounded-full border px-3 py-1'>
+                        <span className='inline-flex items-center rounded-full border px-3 py-1 dark:border-[#404040]'>
                             <FaBath className='mr-2' />
                             {baths}
                         </span>
                     </div>
                 </div>
-                <div className='text-md mt-2 flex items-center border-t pt-2'>
-                    <div className='rounded-full border px-2 py-1'>
+                <div className='text-md mt-2 flex items-center border-t pt-2 dark:border-[#404040]'>
+                    <div className='rounded-full border px-2 py-1 dark:border-[#404040]'>
                         {price} AED
                     </div>
-                    <div className='ml-auto flex items-center rounded-full border px-2 py-1'>
+                    <div className='ml-auto flex items-center rounded-full border px-2 py-1 dark:border-[#404040]'>
                         <Image
                             src={agency?.logo?.url}
                             width='30'
@@ -70,7 +70,9 @@ const Property = ({
                             alt=''
                             className='block rounded-md object-contain object-left sm:rounded-none sm:rounded-b-md'
                         />
-                        {isVerified && <MdVerified className='ml-2 text-2xl' />}
+                        {isVerified && (
+                            <MdVerified className='ml-2 text-2xl text-green-400' />
+                        )}
                     </div>
                 </div>
             </div>
