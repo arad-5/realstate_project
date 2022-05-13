@@ -2,11 +2,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Container } from '@nextui-org/react';
 import { baseURL, fetchAPI } from '../utils/fetchAPI';
-import PropertyCard from '../components/PropertyCard';
+import PropertyCard from '../components/property/PropertyCard';
 import { DarkmodeSwitch } from '../layout';
 
 export default function Home({ propertiesForSale, propertiesForRent }) {
-    console.log(propertiesForSale);
 
     return (
         <>

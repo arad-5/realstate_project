@@ -5,10 +5,10 @@ import 'swiper/css/pagination';
 import { Loading } from '@nextui-org/react';
 import Image from 'next/image';
 
-const PaginationSwiper = ({images , alt}) => {
+const PaginationSwiper = ({ images, alt }) => {
     return (
         <Swiper
-            spaceBetween={5}
+            spaceBetween={0}
             modules={[Pagination]}
             pagination={{
                 dynamicBullets: true,
@@ -16,10 +16,10 @@ const PaginationSwiper = ({images , alt}) => {
             slidesPerView={1}
             // onSlideChange={() => console.log('slide change')}
             // onSwiper={(swiper) => console.log(swiper)}
-            className='h-96 cursor-grab'
+            className='relative h-full cursor-grab'
         >
             {images.map((photo) => (
-                <SwiperSlide key={photo.id} className='relative'>
+                <SwiperSlide key={photo.id}>
                     <div className='flex h-full'>
                         <div className='m-auto'>
                             <Loading size='lg' />
@@ -33,6 +33,7 @@ const PaginationSwiper = ({images , alt}) => {
                     </div>
                 </SwiperSlide>
             ))}
+            <div className='absolute bottom-1 left-1/2 h-5 w-28 -translate-x-1/2 rounded-full border bg-white'></div>
         </Swiper>
     );
 };

@@ -1,9 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
-
 import { FaBed, FaBath } from 'react-icons/fa';
 import { MdCalendarViewMonth, MdVerified } from 'react-icons/md';
 import { IoLocationSharp } from 'react-icons/io5';
+
+// components
+import PropertyAgencyLogoBadge from '../agency/PropertyAgencyLogoBadge'
+
 
 const PropertyCard = ({
     property: {
@@ -61,18 +64,7 @@ const PropertyCard = ({
                     <div className='rounded-full border px-2 py-1 dark:border-[#404040]'>
                         {price} AED
                     </div>
-                    <div className='ml-auto flex items-center rounded-full border px-2 py-1 dark:border-[#404040]'>
-                        <Image
-                            src={agency?.logo?.url}
-                            width='30'
-                            height='30'
-                            alt=''
-                            className='block rounded-md object-contain object-left sm:rounded-none sm:rounded-b-md'
-                        />
-                        {isVerified && (
-                            <MdVerified className='ml-2 text-2xl text-green-400' />
-                        )}
-                    </div>
+                    <PropertyAgencyLogoBadge agency={agency} isVerified={isVerified}/>
                 </div>
             </div>
         </Link>
