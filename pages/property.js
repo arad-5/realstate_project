@@ -10,6 +10,8 @@ import { useState } from 'react';
 import { FaBed, FaBath } from 'react-icons/fa';
 import { MdCalendarViewMonth, MdVerified } from 'react-icons/md';
 
+import GoogleMapReact from 'google-map-react';
+
 const Property = ({ propertyDetail }) => {
     console.log(propertyDetail);
     const {
@@ -26,57 +28,31 @@ const Property = ({ propertyDetail }) => {
         rooms,
         baths,
         purpose,
+        geography,
     } = propertyDetail;
     const [readMore, setReadMore] = useState(false);
     console.log(new Date(1652012646).toLocaleString());
     return (
-        <section className='min-h-screen pt-14 sm:pt-20'>
-            <div className='space grid-cols-2 gap-x-5 md:grid'>
-                <div>
-                    <div className='h-72 rounded-2xl sm:h-96'>
-                        <PaginationSwiper images={photos} alt={title} />
-                    </div>
-                    <div className='my-2 flex sm:justify-start justify-between space-x-2'>
-                        {active && (
-                            <span className='animate-pulse rounded-full bg-green-500 px-4 py-1 font-bold leading-8 text-white dark:bg-green-900 dark:text-green-200'>
-                                active
-                            </span>
-                        )}
-                        <PropertyAgencyLogoBadge
-                            agency={agency}
-                            isVerified={isVerified}
-                        />
-                    </div>
-                </div>
+        <section className='min-h-screen pt-14 pb-20 sm:pt-20'>
+            <div className='sm:px-20'>
                 <div>
                     <div>
-                        <h1 className='text-2xl'>{title}</h1>
-                        <div className='mt-2 flex items-start'>
-                            <IoLocationSharp className='mt-1 text-xl text-blue-600' />
-                            <h3>
-                                {location.map(
-                                    (locationItem) => locationItem.name + ', '
-                                )}
-                            </h3>
+                        <div className='h-72 rounded-2xl sm:h-[50vh]'>
+                            <PaginationSwiper images={photos} alt={title} />
                         </div>
-                        <div className='my-2 p-4 rounded-2xl first-letter border dark:border-[#404040]'>
-                            <p>
-                                {readMore
-                                    ? description
-                                    : description.slice(0, 150) + '...'}
-                                <button
-                                    className={`text-green-500 sm:static sm:mt-4 ml-2 ${
-                                        readMore &&
-                                        'fixed right-2 bottom-24 rounded-full border ml-0 bg-white px-2 py-1 dark:border-[#404040] dark:bg-[#151515]'
-                                    }`}
-                                    onClick={() => setReadMore((curr) => !curr)}
-                                >
-                                    read {readMore ? 'less' : 'more'}
-                                </button>
-                            </p>
+                        <div className='my-2 flex justify-between space-x-2 sm:justify-start'>
+                            {active && (
+                                <span className='animate-pulse rounded-full bg-green-500 px-4 py-1 font-bold leading-8 text-white dark:bg-green-900 dark:text-green-200'>
+                                    active
+                                </span>
+                            )}
+                            <PropertyAgencyLogoBadge
+                                agency={agency}
+                                isVerified={isVerified}
+                            />
                         </div>
                     </div>
-                    <div className='fixed bottom-0 left-0 w-screen space-y-1 border-t bg-white/70 px-2 py-2 backdrop-blur-sm dark:border-[#404040] dark:bg-[#151515]/70 sm:static sm:w-auto'>
+                    <div className='fixed bottom-0 left-0 z-40 w-screen space-y-1 border-t bg-white/70 px-2 py-2 backdrop-blur-sm dark:border-[#404040] dark:bg-[#151515]/70 sm:static sm:flex sm:w-auto sm:border-0 sm:px-0'>
                         <div className='flex items-center space-x-2'>
                             <div className='rounded-full border px-3 py-1 dark:border-[#404040]'>
                                 {price} AED
@@ -85,7 +61,7 @@ const Property = ({ propertyDetail }) => {
                                 {purpose === 'for-sale' ? 'SALE' : 'RENT'}
                             </div>
                         </div>
-                        <div className='flex space-x-2'>
+                        <div className='flex space-x-2 sm:ml-4'>
                             <div className='flex items-center rounded-full border px-3 py-1 dark:border-[#404040]'>
                                 <MdCalendarViewMonth className='mr-2' />
                                 {Math.round(area)} m<sup>2</sup>
@@ -100,21 +76,64 @@ const Property = ({ propertyDetail }) => {
                             </div>
                         </div>
                     </div>
-                    <div className='col-start-1 border-t pt-3 dark:border-[#404040]'>
-                        <ul className='space-x-2'>
-                            {category.map((categoryItem) => (
-                                <li
-                                    className='inline-block rounded-full border px-3 py-1 text-blue-500 dark:border-[#404040]'
-                                    key={categoryItem.slug}
-                                >
-                                    #
-                                    <h4 className='inline'>
-                                        {categoryItem.name}
-                                    </h4>
-                                </li>
-                            ))}
-                        </ul>
+                </div>
+                <div className='inline-block'>
+                    <h1 className='text-2xl'>{title}</h1>
+                    <div className='mt-2 flex items-start'>
+                        <IoLocationSharp className='mt-1 text-xl text-blue-600' />
+                        <h3>
+                            {location.map(
+                                (locationItem) => locationItem.name + ', '
+                            )}
+                        </h3>
                     </div>
+                    <div className='first-letter my-2 rounded-2xl border p-4 dark:border-[#404040]'>
+                        <p>
+                            {readMore
+                                ? description
+                                : description.slice(0, 150) + '...'}
+                            <button
+                                className={`ml-2 text-green-500 sm:static sm:ml-2 sm:mt-4 ${
+                                    readMore &&
+                                    'fixed right-2 bottom-24 ml-0 rounded-full border bg-white px-2 py-1 dark:border-[#404040] dark:bg-[#151515]'
+                                }`}
+                                onClick={() => setReadMore((curr) => !curr)}
+                            >
+                                read {readMore ? 'less' : 'more'}
+                            </button>
+                        </p>
+                    </div>
+                </div>
+                <div className='col-start-1 border-t pt-3 dark:border-[#404040]'>
+                    <ul className='space-x-2'>
+                        {category.map((categoryItem) => (
+                            <li
+                                className='inline-block rounded-full border px-3 py-1 text-blue-500 dark:border-[#404040]'
+                                key={categoryItem.slug}
+                            >
+                                #<h4 className='inline'>{categoryItem.name}</h4>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                <div className='h-60 w-full sm:h-96'>
+                    {geography.lat && geography.lng && (
+                        <GoogleMapReact
+                            defaultCenter={{
+                                lat: geography.lat,
+                                lng: geography.lng,
+                            }}
+                            defaultZoom={15}
+                        >
+                            <div
+                                lat={geography.lat}
+                                lng={geography.lng}
+                                className=' h-6 w-6 -translate-x-1/2 -translate-y-1/2'
+                            >
+                                <IoLocationSharp className=' h-full w-full -translate-y-2 text-base text-blue-600' />
+                            </div>
+                        </GoogleMapReact>
+                    )}
                 </div>
             </div>
         </section>
