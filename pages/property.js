@@ -13,7 +13,7 @@ import { MdCalendarViewMonth, MdVerified } from 'react-icons/md';
 import GoogleMapReact from 'google-map-react';
 
 const Property = ({ propertyDetail }) => {
-    console.log(propertyDetail);
+    // console.log(propertyDetail);
     const {
         title,
         photos,
@@ -30,10 +30,11 @@ const Property = ({ propertyDetail }) => {
         purpose,
         geography,
     } = propertyDetail;
+
     const [readMore, setReadMore] = useState(false);
-    console.log(new Date(1652012646).toLocaleString());
+
     return (
-        <section className='min-h-screen pt-14 pb-20 sm:pt-20'>
+        <section className='pt-14 pb-20 sm:pt-20'>
             <div className='sm:px-20'>
                 <div>
                     <div>
@@ -99,7 +100,7 @@ const Property = ({ propertyDetail }) => {
                                 }`}
                                 onClick={() => setReadMore((curr) => !curr)}
                             >
-                                read {readMore ? 'less' : 'more'}
+                                read {true ? 'less' : 'more'}
                             </button>
                         </p>
                     </div>

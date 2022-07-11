@@ -6,6 +6,8 @@ import { DarkmodeSwitch } from '.';
 import { useRouter } from 'next/router';
 
 const Navbar = () => {
+    const { pathname } = useRouter();
+
     const [toggleNavbar, setToggleNavbar] = useState();
     const scrollHandler = () => {
         if (window.pageYOffset > window.innerHeight / 3) {
@@ -14,16 +16,20 @@ const Navbar = () => {
             setToggleNavbar(false);
         }
     };
-    
     useEffect(() => {
-        scrollHandler();
-        window.addEventListener('scroll', scrollHandler);
-    }, []);
-    const { pathname } = useRouter();
+        if (pathname === '/') {
+            scrollHandler();
+            window.addEventListener('scroll', scrollHandler);
+        } else {
+            setToggleNavbar(true);
+        }
+        return () => window.removeEventListener('scroll', scrollHandler);
+    }, [pathname]);
+
     return (
         <nav
-            className={`fixed left-0 top-0 z-30 h-16 w-screen -translate-y-full border-b bg-white/40 px-6 backdrop-blur-lg transition-transform dark:border-black dark:bg-black/40 ${
-                toggleNavbar || (pathname === '/property' && 'translate-y-0')
+            className={`fixed left-0 top-0 z-50 h-16 w-screen -translate-y-full border-b bg-white/60 px-6 backdrop-blur-lg transition-transform dark:border-black dark:bg-[#151515]/60 ${
+                toggleNavbar && 'translate-y-0'
             }`}
         >
             <div className='container mx-auto flex h-full max-w-7xl items-center justify-between'>

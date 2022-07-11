@@ -4,12 +4,18 @@
 
 @layer base {
     .property-card:hover .property-card-image {
-        @apply -translate-y-2 shadow-md;
+        @apply shadow-md sm:-translate-y-2;
     }
-
+    .property-card:hover .property-purpose-badge {
+        @apply sm:-translate-y-2;
+    }
+    .property-card:hover .property-badge {
+        @apply shadow-md;
+    }
     .swiper-pagination-bullet {
         background-color: #fff;
         color: #fff;
         display: none !important;
     }
+
 }

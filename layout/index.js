@@ -4,7 +4,9 @@ const index = ({ children }) => {
     return (
         <div className='transition-colors dark:bg-[#151515] dark:text-white'>
             <Navbar />
-            <main className='container mx-auto px-2 sm:px-14'>{children}</main>
+            <main className='container mx-auto min-h-screen px-2 sm:px-14'>
+                {children}
+            </main>
             <Footer />
         </div>
     );
@@ -14,6 +16,23 @@ export default index;
 
 import { useTheme } from 'next-themes';
 import { Switch } from '@nextui-org/react';
+
+export const DarkmodeSwitch = () => {
+    const { setTheme, resolvedTheme } = useTheme();
+
+    return (
+        <Switch
+            className='ml-4 text-blue-500 dark:text-black'
+            checked={resolvedTheme === 'dark'}
+            size='lg'
+            iconOn={<SunIcon filled='true' />}
+            iconOff={<MoonIcon filled='true' />}
+            onChange={(e) => setTheme(e.target.checked ? 'dark' : 'light')}
+        />
+    );
+};
+
+
 export const MoonIcon = ({
     fill = 'currentColor',
     filled,
@@ -110,20 +129,5 @@ export const SunIcon = ({
                 d='M17.008 16.51H19.008V19.511000000000003H17.008z'
             ></path>
         </svg>
-    );
-};
-
-export const DarkmodeSwitch = () => {
-    const { setTheme, resolvedTheme } = useTheme();
-    
-    return (
-        <Switch
-            className='ml-4 text-blue-500 dark:text-black'
-            checked={resolvedTheme === 'dark'}
-            size='lg'
-            iconOn={<SunIcon filled />}
-            iconOff={<MoonIcon filled />}
-            onChange={(e) => setTheme(e.target.checked ? 'dark' : 'light')}
-        />
     );
 };
