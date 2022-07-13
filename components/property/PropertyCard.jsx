@@ -22,17 +22,18 @@ const PropertyCard = ({
         purpose,
     },
 }) => {
+    console.log(coverPhoto.url);
     return (
         <Link href={`/property?id=${externalID}`} passHref>
             <div className='property-card relative z-10 cursor-pointer rounded-xl border bg-white p-3 transition dark:border-[#404040] dark:bg-[#202020] sm:mt-20 sm:flex-col sm:rounded-2xl sm:shadow-lg sm:hover:-translate-y-3 sm:hover:shadow-xl'>
                 <div className='flex justify-between sm:block'>
                     <div className='property-card-image relative mb-3 h-28 w-1/3 rounded-2xl transition sm:-mt-20 sm:h-48 sm:w-full'>
                         {coverPhoto && (
-                            <Image
+                            <img
                                 src={coverPhoto.url}
-                                layout='fill'
                                 alt={title}
-                                className='block rounded-md object-cover sm:rounded-2xl'
+                                className='h-full w-full object-cover sm:rounded-2xl'
+                                loading={'lazy'}
                             />
                         )}
                     </div>
@@ -46,15 +47,15 @@ const PropertyCard = ({
                 </div>
                 <div className='flex justify-between'>
                     <div className='space-x-2 space-y-1 text-gray-600 dark:text-gray-300'>
-                        <span className='property-badge duration-100 inline-flex items-center rounded-full border px-3 py-1 transition-shadow dark:border-[#404040]'>
+                        <span className='property-badge inline-flex items-center rounded-full border px-3 py-1 transition-shadow duration-100 dark:border-[#404040]'>
                             <MdCalendarViewMonth className='mr-2' />
                             {Math.round(area)} m<sup>2</sup>
                         </span>
-                        <span className='property-badge duration-300 inline-flex items-center rounded-full border px-3 py-1 transition-shadow dark:border-[#404040]'>
+                        <span className='property-badge inline-flex items-center rounded-full border px-3 py-1 transition-shadow duration-300 dark:border-[#404040]'>
                             <FaBed className='mr-2' />
                             {rooms}
                         </span>
-                        <span className='property-badge duration-500 inline-flex items-center rounded-full border px-3 py-1 transition-shadow dark:border-[#404040]'>
+                        <span className='property-badge inline-flex items-center rounded-full border px-3 py-1 transition-shadow duration-500 dark:border-[#404040]'>
                             <FaBath className='mr-2' />
                             {baths}
                         </span>

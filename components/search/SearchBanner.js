@@ -16,7 +16,7 @@ const SearchBanner = () => {
     });
 
     useEffect(() => {
-        console.log(filters);
+        // console.log(filters);
     }, [filters]);
     
     return (

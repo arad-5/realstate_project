@@ -1,0 +1,89 @@
+import SecondaryButton from '../../buttons/SecondaryButton';
+import { RiWhatsappFill } from 'react-icons/ri';
+import { IoCloseOutline } from 'react-icons/io5';
+import { IoIosCall } from 'react-icons/io';
+import { useEffect } from 'react';
+import Link from 'next/link';
+import PrimaryButton from '../../buttons/PrimaryButton';
+
+const ContactModal = ({
+    phoneNumber,
+    contactName,
+    isContactModalOpen,
+    setIsContactModalOpen,
+    agencyBadge,
+}) => {
+    useEffect(
+        () =>
+            (document.body.style.overflowY = isContactModalOpen
+                ? 'hidden'
+                : 'auto'),
+        [isContactModalOpen]
+    );
+    console.log(phoneNumber);
+    return (
+        <div
+            className={`left fixed left-0 top-16 flex h-screen w-screen items-end justify-center bg-white/60 backdrop-blur-lg dark:bg-[#151515]/60 sm:items-center ${
+                isContactModalOpen ? 'z-50' : '-z-10'
+            }`}
+        >
+            <div
+                className={`min-h-[20rem] max-h-96 overflow-auto w-full max-w-sm translate-y-full space-y-3 rounded-t-2xl border border-zinc-100 bg-white transition-all duration-200 dark:border-zinc-800 dark:bg-[#141414] sm:translate-y-36 sm:rounded-2xl ${
+                    isContactModalOpen
+                        ? 'translate-y-[0%] scale-100 opacity-100 sm:translate-y-0'
+                        : 'scale-50 opacity-0'
+                }`}
+            >
+                <div className='flex items-start justify-between z-30 sticky top-0 backdrop-blur-sm'>
+                    <div className='flex items-center p-5 text-zinc-500 dark:text-zinc-300 '>
+                        {agencyBadge}
+                        <h4 className='ml-2'>{contactName}</h4>
+                    </div>
+                    <button
+                        className='float-right mb-2 p-5 text-3xl'
+                        onClick={() => setIsContactModalOpen(false)}
+                    >
+                        <IoCloseOutline />
+                    </button>
+                </div>
+                <div className='p-5'>
+                    {phoneNumber?.whatsapp ? (
+                        <Link
+                            href={`https://api.whatsapp.com/send?phone=${phoneNumber.whatsapp}&text=hi`}
+                            passHref
+                        >
+                            <SecondaryButton className='relative flex w-full items-center justify-center py-4'>
+                                whatsapp
+                                <RiWhatsappFill className='absolute left-5 text-3xl text-green-500' />
+                            </SecondaryButton>
+                        </Link>
+                    ) : (
+                        ''
+                    )}
+                    <div>
+                        <div className='flex items-center mb-4 mt-6'>
+                            <IoIosCall className='mt-1 mr-2' /> phone numbers:
+                        </div>
+                        <div className='flex flex-col space-y-2'>
+                            {Object.keys(phoneNumber).map((key) => {
+                                return (
+                                    <Link
+                                        href={`tel:${phoneNumber[key]}`}
+                                        passHref
+                                        key={key}
+                                    >
+                                        <SecondaryButton >
+                                            {phoneNumber[key]}
+                                        </SecondaryButton>
+                                    </Link>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default ContactModal;

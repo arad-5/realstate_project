@@ -4,12 +4,13 @@ import Image from 'next/image';
 const PropertyAgencyLogoBadge = ({ agency, isVerified }) => {
     return (
         <div className='property-badge flex items-center rounded-full border px-2 py-1 transition duration-1000 dark:border-[#404040]'>
-            <Image
+            <img
                 src={agency?.logo?.url}
                 width='30'
                 height='30'
                 alt={agency.name}
                 className='block rounded-md object-contain object-left sm:rounded-none sm:rounded-b-md'
+                loading={'lazy'}
             />
             {isVerified && (
                 <MdVerified className='ml-2 text-2xl text-green-400' />

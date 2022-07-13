@@ -5,16 +5,18 @@ import PaginationSwiper from '../components/PaginationSwiper';
 import PropertyAgencyLogoBadge from '../components/agency/PropertyAgencyLogoBadge';
 
 import { IoLocationSharp } from 'react-icons/io5';
-import { CgClose } from 'react-icons/cg';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FaBed, FaBath } from 'react-icons/fa';
 import { MdCalendarViewMonth, MdVerified } from 'react-icons/md';
+import { IoCall } from 'react-icons/io5';
 
 import GoogleMapReact from 'google-map-react';
+import PrimaryButton from '../components/buttons/PrimaryButton';
+import ContactModal from '../components/property/detail/ContactModal';
 
-const Property = ({ propertyDetail }) => {
-    // console.log(propertyDetail);
-    const {
+const Property = ({
+    propertyDetail,
+    propertyDetail: {
         title,
         photos,
         active,
@@ -29,10 +31,13 @@ const Property = ({ propertyDetail }) => {
         baths,
         purpose,
         geography,
-    } = propertyDetail;
-
+        phoneNumber,
+        contactName,
+    },
+}) => {
     const [readMore, setReadMore] = useState(false);
-
+    const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+    console.log(propertyDetail);
     return (
         <section className='pt-14 pb-20 sm:pt-20'>
             <div className='sm:px-20'>
@@ -54,27 +59,34 @@ const Property = ({ propertyDetail }) => {
                         </div>
                     </div>
                     <div className='fixed bottom-0 left-0 z-40 w-screen space-y-1 border-t bg-white/70 px-2 py-2 backdrop-blur-sm dark:border-[#404040] dark:bg-[#151515]/70 sm:static sm:flex sm:w-auto sm:border-0 sm:px-0'>
-                        <div className='flex items-center space-x-2'>
-                            <div className='rounded-full border px-3 py-1 dark:border-[#404040]'>
-                                {price} AED
+                        <div className='w-full items-center justify-between space-y-2 sm:flex'>
+                            <div className='flex flex-wrap space-x-2 space-y-1'>
+                                <div className='rounded-full border px-3 py-1 dark:border-[#404040]'>
+                                    {price} AED
+                                </div>
+                                <div className='absolute -top-10 left-0 rounded-full bg-red-600 px-3 py-1 font-bold text-white dark:bg-[#390000] dark:text-red-500 sm:static'>
+                                    {purpose === 'for-sale' ? 'SALE' : 'RENT'}
+                                </div>
+                                <div className='flex items-center rounded-full border px-3 py-1 dark:border-[#404040]'>
+                                    <MdCalendarViewMonth className='mr-2' />
+                                    {Math.round(area)} m<sup>2</sup>
+                                </div>
+                                <div className='flex items-center rounded-full border px-3 py-1 dark:border-[#404040]'>
+                                    <FaBed className='mr-2' />
+                                    {rooms}
+                                </div>
+                                <div className='flex items-center rounded-full border px-3 py-1 dark:border-[#404040]'>
+                                    <FaBath className='mr-2' />
+                                    {baths}
+                                </div>
                             </div>
-                            <div className='rounded-full bg-red-600 px-3 py-1 font-bold text-white dark:bg-[#390000] dark:text-red-500'>
-                                {purpose === 'for-sale' ? 'SALE' : 'RENT'}
-                            </div>
-                        </div>
-                        <div className='flex space-x-2 sm:ml-4'>
-                            <div className='flex items-center rounded-full border px-3 py-1 dark:border-[#404040]'>
-                                <MdCalendarViewMonth className='mr-2' />
-                                {Math.round(area)} m<sup>2</sup>
-                            </div>
-                            <div className='flex items-center rounded-full border px-3 py-1 dark:border-[#404040]'>
-                                <FaBed className='mr-2' />
-                                {rooms}
-                            </div>
-                            <div className='flex items-center rounded-full border px-3 py-1 dark:border-[#404040]'>
-                                <FaBath className='mr-2' />
-                                {baths}
-                            </div>
+                            <PrimaryButton
+                                className='ml-auto flex w-full items-center justify-center bg-green-600 text-xl ring-green-500/50 sm:w-auto'
+                                onClick={() => setIsContactModalOpen(true)}
+                            >
+                                contact
+                                <IoCall className='ml-2' />
+                            </PrimaryButton>
                         </div>
                     </div>
                 </div>
@@ -96,11 +108,11 @@ const Property = ({ propertyDetail }) => {
                             <button
                                 className={`ml-2 text-green-500 sm:static sm:ml-2 sm:mt-4 ${
                                     readMore &&
-                                    'fixed right-2 bottom-24 ml-0 rounded-full border bg-white px-2 py-1 dark:border-[#404040] dark:bg-[#151515]'
+                                    'fixed right-2 bottom-32 z-20 ml-0 rounded-full border bg-white px-2 py-1 dark:border-[#404040] dark:bg-[#151515]'
                                 }`}
                                 onClick={() => setReadMore((curr) => !curr)}
                             >
-                                read {true ? 'less' : 'more'}
+                                read {readMore ? 'less' : 'more'}
                             </button>
                         </p>
                     </div>
@@ -136,6 +148,19 @@ const Property = ({ propertyDetail }) => {
                         </GoogleMapReact>
                     )}
                 </div>
+                <ContactModal
+                    contact={''}
+                    isContactModalOpen={isContactModalOpen}
+                    setIsContactModalOpen={setIsContactModalOpen}
+                    phoneNumber={phoneNumber}
+                    contactName={contactName}
+                    agencyBadge={
+                        <PropertyAgencyLogoBadge
+                            agency={agency}
+                            isVerified={isVerified}
+                        />
+                    }
+                />
             </div>
         </section>
     );
@@ -144,13 +169,13 @@ const Property = ({ propertyDetail }) => {
 export default Property;
 
 export const getServerSideProps = async ({ query }) => {
-    // const propertyDetail = await fetchAPI(
-    //     `https://bayut.p.rapidapi.com/properties/detail?externalID=${query.id}`
-    // );
+    const propertyDetail = await fetchAPI(
+        `https://bayut.p.rapidapi.com/properties/detail?externalID=${query.id}`
+    );
 
     return {
         props: {
-            propertyDetail: dummy,
+            propertyDetail,
         },
     };
 };
