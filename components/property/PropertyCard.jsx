@@ -22,7 +22,6 @@ const PropertyCard = ({
         purpose,
     },
 }) => {
-    console.log(coverPhoto.url);
     return (
         <Link href={`/property?id=${externalID}`} passHref>
             <div className='property-card relative z-10 cursor-pointer rounded-xl border bg-white p-3 transition dark:border-[#404040] dark:bg-[#202020] sm:mt-20 sm:flex-col sm:rounded-2xl sm:shadow-lg sm:hover:-translate-y-3 sm:hover:shadow-xl'>
@@ -32,7 +31,7 @@ const PropertyCard = ({
                             <img
                                 src={coverPhoto.url}
                                 alt={title}
-                                className='h-full w-full object-cover sm:rounded-2xl'
+                                className='h-full w-full object-cover rounded-xl sm:rounded-2xl'
                                 loading={'lazy'}
                             />
                         )}

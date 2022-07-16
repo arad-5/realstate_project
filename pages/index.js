@@ -2,15 +2,12 @@ import Image from 'next/image';
 import Link from 'next/dist/client/link';
 import { baseURL, fetchAPI } from '../utils/fetchAPI';
 import Intro from '../components/pageSections/index/Intro';
-import Properties from '../components/Properties';
-import SearchBanner from '../components/search/SearchBanner';
-import { useEffect } from 'react';
+import Properties from '../components/property/Properties';
 
 export default function Home({ propertiesForSale, propertiesForRent }) {
     return (
         <>
             <Intro />
-            <SearchBanner />
             <Properties
                 title='🔥properties for sale'
                 properties={propertiesForSale}
