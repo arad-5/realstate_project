@@ -2,7 +2,7 @@ import Footer from './Footer';
 import Navbar from './Navbar';
 const index = ({ children }) => {
     return (
-        <div className='transition-colors dark:bg-[#151515] dark:text-white'>
+        <div className=''>
             <Navbar />
             <main className='container mx-auto min-h-screen px-2 sm:px-14'>
                 {children}

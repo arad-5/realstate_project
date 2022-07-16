@@ -5,7 +5,7 @@ import { fetchAPI, baseURL } from '../../utils/fetchAPI';
 const Index = ({ propertiesForSale }) => {
     return (
         <>
-            <div className='h-screen min-h-[700px] justify-center space-y-5 py-20 lg:flex lg:max-h-[100px] lg:space-x-2 lg:space-y-0'>
+            <div className='min-h-[700px] justify-center space-y-5 py-20 lg:flex lg:max-h-[900px] lg:space-x-2 lg:space-y-0'>
                 <section className='mx-auto  flex w-full max-w-2xl justify-center overflow-auto lg:mx-0'>
                     <Filters />
                 </section>
