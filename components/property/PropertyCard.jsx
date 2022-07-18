@@ -28,11 +28,11 @@ const PropertyCard = ({
                 <div className='flex justify-between sm:block'>
                     <div className='property-card-image relative mb-3 h-28 w-1/3 rounded-2xl transition sm:-mt-20 sm:h-48 sm:w-full'>
                         {coverPhoto && (
-                            <img
+                            <Image
                                 src={coverPhoto.url}
                                 alt={title}
                                 className='h-full w-full object-cover rounded-xl sm:rounded-2xl'
-                                loading={'lazy'}
+                                layout='fill'
                             />
                         )}
                     </div>

@@ -5,11 +5,11 @@ import { fetchAPI, baseURL } from '../../utils/fetchAPI';
 const Index = ({ propertiesForSale }) => {
     return (
         <>
-            <div className='min-h-[700px] justify-center space-y-5 py-20 lg:flex lg:max-h-[900px] lg:space-x-2 lg:space-y-0'>
-                <section className='mx-auto  flex w-full max-w-2xl justify-center overflow-auto lg:mx-0'>
+            <div className='min-h-[700px] justify-center space-y-5 py-20 lg:flex lg:max-h-screen lg:space-x-2 lg:space-y-0'>
+                <section className='mx-auto flex w-full max-w-2xl justify-center overflow-auto lg:mx-0 border dark:border-zinc-800 rounded-2xl'>
                     <Filters />
                 </section>
-                <section className='overflow-y-auto rounded-2xl border dark:border-zinc-800 lg:h-full lg:w-96'>
+                <section className='overflow-y-auto rounded-2xl border dark:border-zinc-800'>
                     <RecommendationProperties properties={propertiesForSale} />
                 </section>
             </div>

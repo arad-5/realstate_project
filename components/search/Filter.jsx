@@ -24,7 +24,7 @@ const Filter = ({ filter, index }) => {
 
     return (
         <div
-            className={`relative overflow-hidden rounded-xl border border-dashed text-xl transition-[height_,_box-shadow]  hover:shadow dark:border-[#404040] ${
+            className={`relative overflow-hidden border-b text-xl transition-[height_,_box-shadow] last:border-b-0 hover:shadow dark:border-zinc-800 md:rounded-xl  md:border md:last:border-b ${
                 isFilterOpen ? 'h-28' : 'h-16'
             }`}
         >
@@ -52,7 +52,7 @@ const Filter = ({ filter, index }) => {
                     </div>
                 </div>
                 <div
-                    className={`absolute left-0 h-full w-full flex flex-col justify-center px-4 transition-[top]`}
+                    className={`absolute left-0 flex h-full w-full flex-col justify-center px-4 transition-[top]`}
                 >
                     <div className='flex justify-between'>
                         <span className='py-1 text-2xl'>{title}</span>

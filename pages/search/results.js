@@ -1,9 +1,9 @@
-import PropertyCard from '../../components/property/PropertyCard'
-
+import PropertyCard from '../../components/property/PropertyCard';
+import { useEffect } from 'react';
 
 const results = ({ result }) => {
     return (
-        <section className='pt-20'>
+        <section className='py-40'>
             <div className='relative mb-8 grid gap-3 sm:grid-cols-2 md:gap-5 lg:grid-cols-3 xl:grid-cols-4'>
                 <div className='absolute -top-20 z-10 w-full text-center text-xl'>
                     <h1 className='inline-block rounded-full border bg-white px-3 py-1 dark:border-0 dark:bg-[#202020]'>
@@ -21,24 +21,27 @@ const results = ({ result }) => {
 export default results;
 
 export const getServerSideProps = async ({ query }) => {
-    const purpose = query.purpose || 'for-rent';
-    const rentFrequency = query.rentFrequency || 'yearly';
-    const minPrice = query.minPrice || '0';
-    const maxPrice = query.maxPrice || '1000000';
-    const roomsMin = query.roomsMin || '0';
-    const bathsMin = query.bathsMin || '0';
-    const sort = query.sort || 'price-desc';
-    const areaMax = query.areaMax || '35000';
-    const locationExternalIDs = query.locationExternalIDs || '5002';
-    const categoryExternalID = query.categoryExternalID || '4';
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key':
+                'd29eaf4539mshe174e53d45b4985p14e53fjsna839bf2d6994',
+            'X-RapidAPI-Host': 'bayut.p.rapidapi.com',
+        },
+    };
+    const querySlug = Object.keys(query)
+        .map((key) => (query[key] !== '' ? `${key}=${query[key]}` : ''))
+        .join('&');
 
-    // const data = await fetchAPI(
-    //     `${baseURL}/properties/list?locationExternalIDs=${locationExternalIDs}&purpose=${purpose}&categoryExternalID=${categoryExternalID}&bathsMin=${bathsMin}&rentFrequency=${rentFrequency}&priceMin=${minPrice}&priceMax=${maxPrice}&roomsMin=${roomsMin}&sort=${sort}&areaMax=${areaMax}`
-    // );
+    const data = fetch(
+        `https://bayut.p.rapidapi.com/properties/list?locationExternalIDs=5002%2C6020&${querySlug}`,
+        options
+    ).then((response) => response.json());
 
+    const { hits } = await data;
     return {
         props: {
-            result: dummy,
+            result: await hits,
         },
     };
 };

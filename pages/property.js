@@ -37,7 +37,7 @@ const Property = ({
 }) => {
     const [readMore, setReadMore] = useState(false);
     const [isContactModalOpen, setIsContactModalOpen] = useState(false);
-    console.log(propertyDetail);
+
     return (
         <section className='pt-14 pb-20 sm:pt-20'>
             <div className='sm:px-20'>
@@ -58,13 +58,13 @@ const Property = ({
                             />
                         </div>
                     </div>
-                    <div className='fixed bottom-0 left-0 z-40 w-screen space-y-1 border-t bg-white/70 px-2 py-2 backdrop-blur-sm dark:border-[#404040] dark:bg-[#151515]/70 sm:static sm:flex sm:w-auto sm:border-0 sm:px-0'>
+                    <div className='fixed bottom-0 left-0 z-40 w-screen sm:space-y-0 space-y-1 border-t bg-white/70 px-2 sm:py-2 backdrop-blur-sm dark:border-[#404040] dark:bg-[#151515]/70 sm:static sm:flex sm:w-auto sm:border-2 sm:px-0'>
                         <div className='w-full items-center justify-between space-y-2 sm:flex'>
-                            <div className='flex flex-wrap space-x-2 space-y-1'>
-                                <div className='rounded-full border px-3 py-1 dark:border-[#404040]'>
+                            <div className='flex flex-wrap space-x-2 text-lg border'>
+                                <div className='flex items-center rounded-full border px-3 py-1 dark:border-[#404040]'>
                                     {price} AED
                                 </div>
-                                <div className='absolute -top-10 left-0 rounded-full bg-red-600 px-3 py-1 font-bold text-white dark:bg-[#390000] dark:text-red-500 sm:static'>
+                                <div className='absolute -top-10 left-0 flex items-center rounded-full bg-red-600 px-3 py-1 font-bold text-white dark:bg-[#390000] dark:text-red-500 sm:static'>
                                     {purpose === 'for-sale' ? 'SALE' : 'RENT'}
                                 </div>
                                 <div className='flex items-center rounded-full border px-3 py-1 dark:border-[#404040]'>
@@ -81,7 +81,7 @@ const Property = ({
                                 </div>
                             </div>
                             <PrimaryButton
-                                className='ml-auto flex w-full items-center justify-center bg-green-600 text-xl ring-green-500/50 sm:w-auto'
+                                className='flex items-center justify-center sm:w-auto'
                                 onClick={() => setIsContactModalOpen(true)}
                             >
                                 contact
@@ -129,7 +129,7 @@ const Property = ({
                         ))}
                     </ul>
                 </div>
-                <div className='h-60 w-full sm:h-96'>
+                <div className='h-[50vh] w-full'>
                     {geography.lat && geography.lng && (
                         <GoogleMapReact
                             defaultCenter={{
@@ -141,7 +141,7 @@ const Property = ({
                             <div
                                 lat={geography.lat}
                                 lng={geography.lng}
-                                className=' h-6 w-6 -translate-x-1/2 -translate-y-1/2'
+                                className='h-6 w-6 -translate-x-1/2 -translate-y-1/2'
                             >
                                 <IoLocationSharp className=' h-full w-full -translate-y-2 text-base text-blue-600' />
                             </div>
