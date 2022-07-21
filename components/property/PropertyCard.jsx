@@ -15,7 +15,7 @@ const PropertyCard = ({ property: { coverPhoto, price, rooms, title, baths, area
                 <div className='flex justify-between sm:block'>
                     <div className='property-card-image shimmer-loading relative mb-3 h-28 w-1/2 rounded-2xl transition sm:-mt-20 sm:h-48 sm:w-full'>
                         {coverPhoto && (
-                            <Image src={coverPhoto.url} alt={title} className='h-full w-full rounded-xl object-cover sm:rounded-2xl' layout='fill' />
+                            <Image src={coverPhoto.url} alt={title} className='h-full w-full rounded-xl object-cover sm:rounded-2xl' layout='fill' quality={1}/>
                         )}
                     </div>
                     <div className='relative h-12 w-1/2 overflow-hidden sm:w-full'>
