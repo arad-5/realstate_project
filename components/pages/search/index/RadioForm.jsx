@@ -1,5 +1,5 @@
-import { useFilters } from '../../context/search/FiltersProvider';
-import { useSelectedFiltersSlug } from '../../context/search/SelectedFiltersSlugProvider';
+import { useFilters } from '../../../../context/search/FiltersProvider';
+import { useSelectedFiltersSlug } from '../../../../context/search/SelectedFiltersSlugProvider';
 
 const RadioForm = ({ filterIndex }) => {
     const { filters } = useFilters();

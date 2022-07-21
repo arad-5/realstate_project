@@ -1,4 +1,4 @@
-import Filters from '../../components/search/Filters';
+import Filters from '../../components/pages/search/index/Filters';
 import RecommendationProperties from '../../components/pageSections/search/RecommendationProperties';
 import { fetchAPI, baseURL } from '../../utils/fetchAPI';
 

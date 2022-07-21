@@ -1,5 +1,5 @@
-import { useSelectedFiltersSlug } from '../../context/search/SelectedFiltersSlugProvider';
-import { useFilters } from '../../context/search/FiltersProvider';
+import { useSelectedFiltersSlug } from '../../../../context/search/SelectedFiltersSlugProvider';
+import { useFilters } from '../../../../context/search/FiltersProvider';
 
 const MinMaxForm = ({ filterIndex }) => {
     const { filters } = useFilters();

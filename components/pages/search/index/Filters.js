@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import PrimaryButton from '../buttons/PrimaryButton';
+import PrimaryButton from '../../../buttons/PrimaryButton';
 import Filter from './Filter';
-import { useFilters } from '../../context/search/FiltersProvider';
-import { useSelectedFiltersSlug } from '../../context/search/SelectedFiltersSlugProvider';
+import { useFilters } from '../../../../context/search/FiltersProvider';
+import { useSelectedFiltersSlug } from '../../../../context/search/SelectedFiltersSlugProvider';
 
 const Filters = () => {
     const { filters, setFilters } = useFilters();
@@ -30,7 +30,7 @@ const Filters = () => {
             </div>
             <div className='fixed bottom-0 left-0 z-30 w-screen border-t bg-white/60 px-4 py-2 backdrop-blur-lg dark:border-zinc-800 dark:bg-[#151515]/60 sm:sticky md:w-full'>
                 <Link href={`/search/results?${searchSlug}`} passHref>
-                    <PrimaryButton>Search</PrimaryButton>
+                    <PrimaryButton className='w-full'>Search</PrimaryButton>
                 </Link>
             </div>
         </div>

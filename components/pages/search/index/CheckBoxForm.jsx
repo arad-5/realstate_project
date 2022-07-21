@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useFilters } from '../../context/search/FiltersProvider';
-import SecondaryButton from '../buttons/SecondaryButton';
+import { useFilters } from '../../../../context/search/FiltersProvider';
+import SecondaryButton from '../../../buttons/SecondaryButton';
 import { BsCheck } from 'react-icons/bs';
-import { useSelectedFiltersSlug } from '../../context/search/SelectedFiltersSlugProvider';
+import { useSelectedFiltersSlug } from '../../../../context/search/SelectedFiltersSlugProvider';
 
 const CheckBoxForm = ({ filterIndex }) => {
     const { filters } = useFilters();

@@ -1,88 +1,68 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { FaBed, FaBath } from 'react-icons/fa';
-import { MdCalendarViewMonth, MdVerified } from 'react-icons/md';
-import { IoLocationSharp } from 'react-icons/io5';
-
+import Link from 'next/link'
+import Image from 'next/image'
+import { FaBed, FaBath } from 'react-icons/fa'
+import { MdCalendarViewMonth, MdVerified } from 'react-icons/md'
+import { IoLocationSharp } from 'react-icons/io5'
+import { useEffect } from 'react'
+import Badge from '../Badge'
 // components
-import PropertyAgencyLogoBadge from '../agency/PropertyAgencyLogoBadge';
+import PropertyAgencyLogoBadge from '../agency/PropertyAgencyLogoBadge'
 
-const PropertyCard = ({
-    property: {
-        coverPhoto,
-        price,
-        rooms,
-        title,
-        baths,
-        area,
-        agency,
-        isVerified,
-        externalID,
-        location,
-        purpose,
-    },
-}) => {
+const PropertyCard = ({ property: { coverPhoto, price, rooms, title, baths, area, agency, isVerified, externalID, location, purpose } }) => {
     return (
         <Link href={`/property?id=${externalID}`} passHref>
-            <div className='property-card relative z-10 cursor-pointer rounded-xl border bg-white p-3 transition dark:border-[#404040] dark:bg-[#202020] sm:mt-20 sm:flex-col sm:rounded-2xl sm:shadow-lg sm:hover:-translate-y-3 sm:hover:shadow-xl'>
+            <div className='property-card relative z-10 cursor-pointer rounded-xl border bg-white p-3 transition dark:border-[#404040] dark:bg-[#202020] sm:mt-20 sm:rounded-2xl sm:shadow-lg sm:hover:-translate-y-3 sm:hover:shadow-xl'>
                 <div className='flex justify-between sm:block'>
-                    <div className='property-card-image relative mb-3 h-28 w-1/3 rounded-2xl transition sm:-mt-20 sm:h-48 sm:w-full'>
+                    <div className='property-card-image shimmer-loading relative mb-3 h-28 w-1/2 rounded-2xl transition sm:-mt-20 sm:h-48 sm:w-full'>
                         {coverPhoto && (
-                            <Image
-                                src={coverPhoto.url}
-                                alt={title}
-                                className='h-full w-full object-cover rounded-xl sm:rounded-2xl'
-                                layout='fill'
-                            />
+                            <Image src={coverPhoto.url} alt={title} className='h-full w-full rounded-xl object-cover sm:rounded-2xl' layout='fill' />
                         )}
                     </div>
-                    <div className='relative my-1 ml-4 w-2/3 overflow-auto sm:ml-0 sm:h-24 sm:w-full'>
-                        <h2>{title.slice(0, 50)}</h2>
-                        <div className='mt-2 flex items-start'>
-                            <IoLocationSharp className='mt-1 text-xl text-blue-600' />
-                            <span>{`${location[2].name}`}</span>
-                        </div>
+                    <div className='relative h-12 w-1/2 overflow-hidden sm:w-full'>
+                        <h2 className='px-2'>{title}</h2>
                     </div>
                 </div>
-                <div className='flex justify-between'>
-                    <div className='space-x-2 space-y-1 text-gray-600 dark:text-gray-300'>
-                        <span className='property-badge inline-flex items-center rounded-full border px-3 py-1 transition-shadow duration-100 dark:border-[#404040]'>
+                <div>
+                    <div className='stems-start mt-2 flex h-6 w-full overflow-hidden leading-5'>
+                        <IoLocationSharp className='h-5 w-5 flex-shrink-0 text-xl text-blue-600' />
+                        {location
+                            .slice(1)
+                            .map(location => location.name)
+                            .join(', ')}
+                    </div>
+                    <div className='my-2 space-x-2 duration-100'>
+                        <Badge className='property-badge transition-shadow'>
                             <MdCalendarViewMonth className='mr-2' />
                             {Math.round(area)} m<sup>2</sup>
-                        </span>
-                        <span className='property-badge inline-flex items-center rounded-full border px-3 py-1 transition-shadow duration-300 dark:border-[#404040]'>
+                        </Badge>
+                        <Badge className='property-badge transition-shadow duration-200'>
                             <FaBed className='mr-2' />
                             {rooms}
-                        </span>
-                        <span className='property-badge inline-flex items-center rounded-full border px-3 py-1 transition-shadow duration-500 dark:border-[#404040]'>
+                        </Badge>
+                        <Badge className='property-badge duration-300'>
                             <FaBath className='mr-2' />
                             {baths}
-                        </span>
+                        </Badge>
                     </div>
                 </div>
-                <div className='text-md mt-2 flex items-center justify-between border-t pt-2 dark:border-[#404040]'>
+                <div className='text-md flex items-center justify-between overflow-hidden border-t pt-2 dark:border-[#404040]'>
                     <div className='flex'>
                         <div className='property-badge mr-2 rounded-full border px-2 py-1 transition-shadow dark:border-[#404040]'>
-                            {price} AED
+                            {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} AED
                         </div>
-                        <div
-                            className={`property-badge property-purpose-badge left-6 top-6 rounded-full px-3 py-1 font-bold text-white transition duration-700 sm:-mt-20 ${
-                                purpose === 'for-sale'
-                                    ? 'bg-red-600 dark:bg-[#390000] dark:text-red-500'
-                                    : 'bg-yellow-500 dark:bg-yellow-900 dark:text-yellow-500'
-                            }  sm:absolute`}
+                        <Badge
+                            className={`property-badge property-purpose-badge left-6 top-6 border-0  transition duration-700 sm:absolute sm:-mt-20 ${
+                                purpose === 'for-sale' ? 'bg-red-600' : 'bg-yellow-500'
+                            } `}
                         >
-                            {purpose === 'for-sale' ? 'SALE' : 'RENT'}
-                        </div>
+                            <b className='text-white'>{purpose === 'for-sale' ? 'SALE' : 'RENT'}</b>
+                        </Badge>
                     </div>
-                    <PropertyAgencyLogoBadge
-                        agency={agency}
-                        isVerified={isVerified}
-                    />
+                    <PropertyAgencyLogoBadge agency={agency} isVerified={isVerified} />
                 </div>
             </div>
         </Link>
-    );
-};
+    )
+}
 
-export default PropertyCard;
+export default PropertyCard

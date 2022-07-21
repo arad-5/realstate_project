@@ -1,21 +1,22 @@
-import { fetchAPI } from '../utils/fetchAPI';
+import { fetchAPI } from '../utils/fetchAPI'
 
-import Image from 'next/image';
-import PaginationSwiper from '../components/PaginationSwiper';
-import PropertyAgencyLogoBadge from '../components/agency/PropertyAgencyLogoBadge';
+import parse from 'html-react-parser'
+import Image from 'next/image'
+import PaginationSwiper from '../components/PaginationSwiper'
+import PropertyAgencyLogoBadge from '../components/agency/PropertyAgencyLogoBadge'
 
-import { IoLocationSharp } from 'react-icons/io5';
-import { useState, useEffect } from 'react';
-import { FaBed, FaBath } from 'react-icons/fa';
-import { MdCalendarViewMonth, MdVerified } from 'react-icons/md';
-import { IoCall } from 'react-icons/io5';
+import { IoLocationSharp } from 'react-icons/io5'
+import { useState, useEffect } from 'react'
+import { FaBed, FaBath } from 'react-icons/fa'
+import { MdCalendarViewMonth, MdVerified } from 'react-icons/md'
+import { IoCall } from 'react-icons/io5'
 
-import GoogleMapReact from 'google-map-react';
-import PrimaryButton from '../components/buttons/PrimaryButton';
-import ContactModal from '../components/property/detail/ContactModal';
+import GoogleMapReact from 'google-map-react'
+import PrimaryButton from '../components/buttons/PrimaryButton'
+import ContactModal from '../components/property/detail/ContactModal'
+import Badge from '../components/Badge'
 
 const Property = ({
-    propertyDetail,
     propertyDetail: {
         title,
         photos,
@@ -35,8 +36,7 @@ const Property = ({
         contactName,
     },
 }) => {
-    const [readMore, setReadMore] = useState(false);
-    const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+    const [isContactModalOpen, setIsContactModalOpen] = useState(false)
 
     return (
         <section className='pt-14 pb-20 sm:pt-20'>
@@ -52,38 +52,30 @@ const Property = ({
                                     active
                                 </span>
                             )}
-                            <PropertyAgencyLogoBadge
-                                agency={agency}
-                                isVerified={isVerified}
-                            />
+                            <PropertyAgencyLogoBadge agency={agency} isVerified={isVerified} />
                         </div>
                     </div>
-                    <div className='fixed bottom-0 left-0 z-40 w-screen sm:space-y-0 space-y-1 border-t bg-white/70 px-2 sm:py-2 backdrop-blur-sm dark:border-[#404040] dark:bg-[#151515]/70 sm:static sm:flex sm:w-auto sm:border-2 sm:px-0'>
+                    <div className='fixed bottom-0 left-0 z-40 w-screen space-y-1 border-t bg-white/70 px-2 backdrop-blur-sm dark:border-[#404040] dark:bg-[#151515]/70 sm:static sm:flex sm:w-auto sm:space-y-0 sm:border-2 sm:py-2 sm:px-0'>
                         <div className='w-full items-center justify-between space-y-2 sm:flex'>
-                            <div className='flex flex-wrap space-x-2 text-lg border'>
-                                <div className='flex items-center rounded-full border px-3 py-1 dark:border-[#404040]'>
-                                    {price} AED
-                                </div>
-                                <div className='absolute -top-10 left-0 flex items-center rounded-full bg-red-600 px-3 py-1 font-bold text-white dark:bg-[#390000] dark:text-red-500 sm:static'>
-                                    {purpose === 'for-sale' ? 'SALE' : 'RENT'}
-                                </div>
-                                <div className='flex items-center rounded-full border px-3 py-1 dark:border-[#404040]'>
+                            <div className='flex flex-wrap space-x-2 border text-lg'>
+                                <Badge>{price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} AED</Badge>
+                                <Badge className={`absolute -top-10 left-0 sm:static ${purpose === 'for-sale' ? 'bg-red-600' : 'bg-yellow-500'}`}>
+                                    <b className='text-white'> {purpose === 'for-sale' ? 'SALE' : 'RENT'}</b>
+                                </Badge>
+                                <Badge>
                                     <MdCalendarViewMonth className='mr-2' />
                                     {Math.round(area)} m<sup>2</sup>
-                                </div>
-                                <div className='flex items-center rounded-full border px-3 py-1 dark:border-[#404040]'>
+                                </Badge>
+                                <Badge>
                                     <FaBed className='mr-2' />
                                     {rooms}
-                                </div>
-                                <div className='flex items-center rounded-full border px-3 py-1 dark:border-[#404040]'>
+                                </Badge>
+                                <Badge>
                                     <FaBath className='mr-2' />
                                     {baths}
-                                </div>
+                                </Badge>
                             </div>
-                            <PrimaryButton
-                                className='flex items-center justify-center sm:w-auto'
-                                onClick={() => setIsContactModalOpen(true)}
-                            >
+                            <PrimaryButton className='flex items-center justify-center sm:w-auto' onClick={() => setIsContactModalOpen(true)}>
                                 contact
                                 <IoCall className='ml-2' />
                             </PrimaryButton>
@@ -92,38 +84,21 @@ const Property = ({
                 </div>
                 <div className='inline-block'>
                     <h1 className='text-2xl'>{title}</h1>
-                    <div className='mt-2 flex items-start'>
-                        <IoLocationSharp className='mt-1 text-xl text-blue-600' />
-                        <h3>
-                            {location.map(
-                                (locationItem) => locationItem.name + ', '
-                            )}
-                        </h3>
+                    <div className='stems-start mt-2 flex h-6 w-full overflow-hidden leading-5'>
+                        <IoLocationSharp className='h-5 w-5 flex-shrink-0 text-xl text-blue-600' />
+                        {location
+                            .slice(1)
+                            .map(location => location.name)
+                            .join(', ')}
                     </div>
                     <div className='first-letter my-2 rounded-2xl border p-4 dark:border-[#404040]'>
-                        <p>
-                            {readMore
-                                ? description
-                                : description.slice(0, 150) + '...'}
-                            <button
-                                className={`ml-2 text-green-500 sm:static sm:ml-2 sm:mt-4 ${
-                                    readMore &&
-                                    'fixed right-2 bottom-32 z-20 ml-0 rounded-full border bg-white px-2 py-1 dark:border-[#404040] dark:bg-[#151515]'
-                                }`}
-                                onClick={() => setReadMore((curr) => !curr)}
-                            >
-                                read {readMore ? 'less' : 'more'}
-                            </button>
-                        </p>
+                        <p>{parse(description)}</p>
                     </div>
                 </div>
                 <div className='col-start-1 border-t pt-3 dark:border-[#404040]'>
                     <ul className='space-x-2'>
-                        {category.map((categoryItem) => (
-                            <li
-                                className='inline-block rounded-full border px-3 py-1 text-blue-500 dark:border-[#404040]'
-                                key={categoryItem.slug}
-                            >
+                        {category.map(categoryItem => (
+                            <li className='inline-block rounded-full border px-3 py-1 text-blue-500 dark:border-[#404040]' key={categoryItem.slug}>
                                 #<h4 className='inline'>{categoryItem.name}</h4>
                             </li>
                         ))}
@@ -138,11 +113,7 @@ const Property = ({
                             }}
                             defaultZoom={15}
                         >
-                            <div
-                                lat={geography.lat}
-                                lng={geography.lng}
-                                className='h-6 w-6 -translate-x-1/2 -translate-y-1/2'
-                            >
+                            <div lat={geography.lat} lng={geography.lng} className='h-6 w-6 -translate-x-1/2 -translate-y-1/2'>
                                 <IoLocationSharp className=' h-full w-full -translate-y-2 text-base text-blue-600' />
                             </div>
                         </GoogleMapReact>
@@ -154,31 +125,24 @@ const Property = ({
                     setIsContactModalOpen={setIsContactModalOpen}
                     phoneNumber={phoneNumber}
                     contactName={contactName}
-                    agencyBadge={
-                        <PropertyAgencyLogoBadge
-                            agency={agency}
-                            isVerified={isVerified}
-                        />
-                    }
+                    agencyBadge={<PropertyAgencyLogoBadge agency={agency} isVerified={isVerified} />}
                 />
             </div>
         </section>
-    );
-};
+    )
+}
 
-export default Property;
+export default Property
 
 export const getServerSideProps = async ({ query }) => {
-    const propertyDetail = await fetchAPI(
-        `https://bayut.p.rapidapi.com/properties/detail?externalID=${query.id}`
-    );
+    const propertyDetail = await fetchAPI(`https://bayut.p.rapidapi.com/properties/detail?externalID=${query.id}`)
 
     return {
         props: {
             propertyDetail,
         },
-    };
-};
+    }
+}
 const dummy = {
     id: 3215081,
     objectID: 3215081,
@@ -198,8 +162,7 @@ const dummy = {
     referenceNumber: 'JVC-HK-EATONP-2BR',
     permitNumber: '7197538784',
     title: 'Kitchen Appliances | Pool View | Best Investment',
-    title_l1:
-        'شقة في إيتون بليس قرية جميرا الدائرية 2 غرف 1250000 درهم - 5933491',
+    title_l1: 'شقة في إيتون بليس قرية جميرا الدائرية 2 غرف 1250000 درهم - 5933491',
     description:
         'Azco Real Estate Brokers (LLC) is delighted to offer you this Stylish and Upgraded Elegant apartment located in the most sought-after residential community in Dubai, Jumeirah Village Circle. \n\nEaton Place is the perfect place to make precious memories. A place for the kids to run free with its beautifully landscaped gardens, to keep fit and healthy with its fitness and recreation facilities and to hang-out and relax in the majestic entrance lobby. Easily accessible and suitable for families, Eaton Place promotes modern family living where family comes first. \n\nSituated in the heart of Jumeirah Village Circle (JVC) Dubai, Eaton Place holds a distinct architectural style in the heart of JVC Community, with its striking residential exterior and welcoming ambience. \n\nPROPERTY DETAILS AND AMENITIES:\n■ 2 Bedroom Apartment\n■ 2 Bathrooms\n■ Parking space\n■ Covered Parking\n■ Central A/C\n■ Build In Wardrobes\n■ Children Play Area\n■ Build In Wardrobes\n■ Broadband Ready\n\nCONTACT US: MR. HASSAN KHALID - Property Consultant\n\nWHO WE ARE?\nAZCO Real Estate Brokers, LLC. is an award winning and culturally diverse brokerage that brings together a team of multilingual and highly qualified real estate brokers. AZCO utilizes extensive expertise of the local market and internationalism of real estate. At AZCO, we exercise a client centrode approach that helps us to deliver end-to-end property management and real estate solutions. \n\nBuyers, Sellers, and Tenants can reach us anytime. Thank you for Choosing Azco Real Estate!',
     description_l1:
@@ -626,4 +589,4 @@ const dummy = {
     indyScore_l1: 729,
     hasMatchingFloorPlans: true,
     hidePrice: false,
-};
+}

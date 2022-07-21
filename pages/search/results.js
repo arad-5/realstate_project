@@ -1,50 +1,34 @@
-import PropertyCard from '../../components/property/PropertyCard';
-import { useEffect } from 'react';
+import FiltersStatusBar from '../../components/pages/search/result/FiltersStatusBar'
+import PropertyCard from '../../components/property/PropertyCard'
+import { fetchAPI } from '../../utils/fetchAPI'
 
 const results = ({ result }) => {
     return (
         <section className='py-40'>
+            <FiltersStatusBar />
             <div className='relative mb-8 grid gap-3 sm:grid-cols-2 md:gap-5 lg:grid-cols-3 xl:grid-cols-4'>
                 <div className='absolute -top-20 z-10 w-full text-center text-xl'>
-                    <h1 className='inline-block rounded-full border bg-white px-3 py-1 dark:border-0 dark:bg-[#202020]'>
-                        🔥properties for rent
-                    </h1>
+                    <h1 className='inline-block rounded-full border bg-white px-3 py-1 dark:border-0 dark:bg-[#202020]'></h1>
                 </div>
-                {result.map((property) => (
+                {result.map(property => (
                     <PropertyCard property={property} key={property.id} />
                 ))}
             </div>
         </section>
-    );
-};
+    )
+}
 
-export default results;
+export default results
 
-export const getServerSideProps = async ({ query }) => {
-    const options = {
-        method: 'GET',
-        headers: {
-            'X-RapidAPI-Key':
-                'd29eaf4539mshe174e53d45b4985p14e53fjsna839bf2d6994',
-            'X-RapidAPI-Host': 'bayut.p.rapidapi.com',
-        },
-    };
-    const querySlug = Object.keys(query)
-        .map((key) => (query[key] !== '' ? `${key}=${query[key]}` : ''))
-        .join('&');
+export const getServerSideProps = async ({ resolvedUrl }) => {
+    // const { hits } = await fetchAPI(`https://bayut.p.rapidapi.com/properties/list?locationExternalIDs=5002%2C6020&${resolvedUrl.split('?')[1]}`)
 
-    const data = fetch(
-        `https://bayut.p.rapidapi.com/properties/list?locationExternalIDs=5002%2C6020&${querySlug}`,
-        options
-    ).then((response) => response.json());
-
-    const { hits } = await data;
     return {
         props: {
-            result: await hits,
+            result: dummy,
         },
-    };
-};
+    }
+}
 
 const dummy = [
     {
@@ -70,8 +54,7 @@ const dummy = [
         referenceNumber: '2491-Ap-R-0235',
         permitNumber: '6511633712',
         title: 'Stunning View of Burj Khalifa| Fully Furnished| Vacant',
-        title_l1:
-            'شقة في العنوان بوليفارد وسط مدينة دبي 4 غرف 1000000 درهم - 5708128',
+        title_l1: 'شقة في العنوان بوليفارد وسط مدينة دبي 4 غرف 1000000 درهم - 5708128',
         externalID: '5708128',
         slug: 'stunning-view-of-burj-khalifa-fully-furnished-vacant-5708128',
         slug_l1: 'stunning-view-of-burj-khalifa-fully-furnished-vacant-5708128',
@@ -245,10 +228,8 @@ const dummy = [
         indyScore_l1: 101,
         hasMatchingFloorPlans: false,
         photoIDs: [
-            194436852, 193899165, 193899166, 194436859, 193899168, 193904917,
-            194436866, 193899171, 193929262, 193929263, 193899210, 193904925,
-            193899212, 194436873, 193904928, 193904929, 194436874, 193904931,
-            193899218, 193899219, 193929270, 193904935, 193904936, 196048768,
+            194436852, 193899165, 193899166, 194436859, 193899168, 193904917, 194436866, 193899171, 193929262, 193929263, 193899210, 193904925,
+            193899212, 194436873, 193904928, 193904929, 194436874, 193904931, 193899218, 193899219, 193929270, 193904935, 193904936, 196048768,
             193899224, 193899225, 194436884, 194436886,
         ],
         hidePrice: false,
@@ -418,8 +399,7 @@ const dummy = [
         referenceNumber: 'AQ-R-22-00057',
         permitNumber: '7117460020',
         title: 'Superb Unit | Stunning Burj Khalifa View',
-        title_l1:
-            'شقة في العنوان بوليفارد وسط مدينة دبي 4 غرف 1000000 درهم - 5658286',
+        title_l1: 'شقة في العنوان بوليفارد وسط مدينة دبي 4 غرف 1000000 درهم - 5658286',
         externalID: '5658286',
         slug: 'superb-unit-stunning-burj-khalifa-view-5658286',
         slug_l1: 'superb-unit-stunning-burj-khalifa-view-5658286',
@@ -586,8 +566,7 @@ const dummy = [
         indyScore_l1: 82,
         hasMatchingFloorPlans: false,
         photoIDs: [
-            180483903, 180483904, 180483905, 180483906, 180483907, 180483908,
-            180483909, 180483910, 180483911, 180483912, 180483913, 180483914,
+            180483903, 180483904, 180483905, 180483906, 180483907, 180483908, 180483909, 180483910, 180483911, 180483912, 180483913, 180483914,
             180483915, 180483916, 180483917, 180483918,
         ],
         hidePrice: false,
@@ -722,8 +701,7 @@ const dummy = [
         referenceNumber: '1846-Ap-R-0146',
         permitNumber: '1366501906',
         title: 'Stunning Full Sea View | Vacant | Spacious',
-        title_l1:
-            'شقة في بناية الشقق 4 بلوواترز ريزيدينسز جزيرة بلوواترز‬ 4 غرف 1000000 درهم - 5918939',
+        title_l1: 'شقة في بناية الشقق 4 بلوواترز ريزيدينسز جزيرة بلوواترز‬ 4 غرف 1000000 درهم - 5918939',
         externalID: '5918939',
         slug: 'stunning-full-sea-view-vacant-spacious-5918939',
         slug_l1: 'stunning-full-sea-view-vacant-spacious-5918939',
@@ -771,8 +749,7 @@ const dummy = [
                 name: 'Apartment Building 4',
                 name_l1: 'بناية الشقق 4',
                 slug: '/dubai/bluewaters-island/bluewaters-residences/apartment-building-4',
-                slug_l1:
-                    '/dubai/bluewaters-island/bluewaters-residences/apartment-building-4',
+                slug_l1: '/dubai/bluewaters-island/bluewaters-residences/apartment-building-4',
             },
         ],
         category: [
@@ -904,8 +881,7 @@ const dummy = [
         indyScore_l1: 334,
         hasMatchingFloorPlans: false,
         photoIDs: [
-            208163584, 208163587, 215719257, 208163583, 208163589, 208163591,
-            208163593, 209335918, 208163597, 208163704, 208163603, 208163605,
+            208163584, 208163587, 215719257, 208163583, 208163589, 208163591, 208163593, 209335918, 208163597, 208163704, 208163603, 208163605,
             208165046,
         ],
         hidePrice: false,
@@ -1075,8 +1051,7 @@ const dummy = [
         referenceNumber: '1173-Ap-R-2716',
         permitNumber: null,
         title: '5 BEDROOM APARTMENT FOR RENT IN THE ADRESS DOWNTOWN',
-        title_l1:
-            'شقة في العنوان رزيدنس سكاي فيو وسط مدينة دبي 5 غرف 1000000 درهم - 5698433',
+        title_l1: 'شقة في العنوان رزيدنس سكاي فيو وسط مدينة دبي 5 غرف 1000000 درهم - 5698433',
         externalID: '5698433',
         slug: '5-bedroom-apartment-for-rent-in-the-adress-downtown-5698433',
         slug_l1: '5-bedroom-apartment-for-rent-in-the-adress-downtown-5698433',
@@ -1219,8 +1194,7 @@ const dummy = [
         indyScore_l1: 92,
         hasMatchingFloorPlans: false,
         photoIDs: [
-            185866357, 191693231, 183534772, 186987166, 185347144, 183540719,
-            184345268, 183540721, 187011873, 185347153, 184340465, 185347155,
+            185866357, 191693231, 183534772, 186987166, 185347144, 183540719, 184345268, 183540721, 187011873, 185347153, 184340465, 185347155,
             184340470, 184340473, 193341382, 190890679,
         ],
         hidePrice: false,
@@ -1300,8 +1274,7 @@ const dummy = [
         referenceNumber: 'RL-24960',
         permitNumber: '7117766923',
         title: 'SHORT TERM OPTION | BURJ VIEW | SKY COLLECTION',
-        title_l1:
-            'شقة في العنوان بوليفارد سكاي كولكشن وسط مدينة دبي 4 غرف 1000000 درهم - 5516666',
+        title_l1: 'شقة في العنوان بوليفارد سكاي كولكشن وسط مدينة دبي 4 غرف 1000000 درهم - 5516666',
         externalID: '5516666',
         slug: 'short-term-option-burj-view-sky-collection-5516666',
         slug_l1: 'short-term-option-burj-view-sky-collection-5516666',
@@ -1340,8 +1313,7 @@ const dummy = [
                 name: 'The Address BLVD Sky Collection',
                 name_l1: 'العنوان بوليفارد سكاي كولكشن',
                 slug: '/dubai/downtown-dubai/the-address-blvd-sky-collection',
-                slug_l1:
-                    '/dubai/downtown-dubai/the-address-blvd-sky-collection',
+                slug_l1: '/dubai/downtown-dubai/the-address-blvd-sky-collection',
             },
         ],
         category: [
@@ -1473,8 +1445,7 @@ const dummy = [
         indyScore_l1: 7,
         hasMatchingFloorPlans: false,
         photoIDs: [
-            169007414, 169007422, 169007426, 169007430, 169007433, 169007435,
-            169007439, 169007444, 169007447, 169007454, 169007476, 169007481,
+            169007414, 169007422, 169007426, 169007430, 169007433, 169007435, 169007439, 169007444, 169007447, 169007454, 169007476, 169007481,
         ],
         hidePrice: false,
         objectID: '2778907',
@@ -1643,8 +1614,7 @@ const dummy = [
         referenceNumber: 'B-AR-64056',
         permitNumber: '7117594173',
         title: '4bed, sky collection, full burj view',
-        title_l1:
-            'شقة في العنوان رزيدنس فاونتن فيوز 1 العنوان رزيدنس فاونتن فيوز وسط مدينة دبي 4 غرف 999989 درهم - 5682292',
+        title_l1: 'شقة في العنوان رزيدنس فاونتن فيوز 1 العنوان رزيدنس فاونتن فيوز وسط مدينة دبي 4 غرف 999989 درهم - 5682292',
         externalID: '5682292',
         slug: '4bed-sky-collection-full-burj-view-5682292',
         slug_l1: '4bed-sky-collection-full-burj-view-5682292',
@@ -1683,8 +1653,7 @@ const dummy = [
                 name: 'The Address Residence Fountain Views',
                 name_l1: 'العنوان رزيدنس فاونتن فيوز',
                 slug: '/dubai/downtown-dubai/the-address-residence-fountain-views',
-                slug_l1:
-                    '/dubai/downtown-dubai/the-address-residence-fountain-views',
+                slug_l1: '/dubai/downtown-dubai/the-address-residence-fountain-views',
             },
             {
                 id: 1227,
@@ -1693,8 +1662,7 @@ const dummy = [
                 name: 'The Address Fountain Views 1',
                 name_l1: 'العنوان رزيدنس فاونتن فيوز 1',
                 slug: '/dubai/downtown-dubai/the-address-residence-fountain-views/the-address-fountain-views-1',
-                slug_l1:
-                    '/dubai/downtown-dubai/the-address-residence-fountain-views/the-address-fountain-views-1',
+                slug_l1: '/dubai/downtown-dubai/the-address-residence-fountain-views/the-address-fountain-views-1',
             },
         ],
         category: [
@@ -1839,8 +1807,7 @@ const dummy = [
         indyScore_l1: 7,
         hasMatchingFloorPlans: false,
         photoIDs: [
-            181930359, 181930363, 181930365, 181930366, 181930367, 181930370,
-            181930373, 181930374, 181930375, 181930376, 181930377, 181930379,
+            181930359, 181930363, 181930365, 181930366, 181930367, 181930370, 181930373, 181930374, 181930375, 181930376, 181930377, 181930379,
             181930380,
         ],
         hidePrice: false,
@@ -2080,8 +2047,7 @@ const dummy = [
         referenceNumber: 'RL-5329',
         permitNumber: '7148967606',
         title: 'Sea & Sunset Facing, Beautiful view, Furnished',
-        title_l1:
-            'شقة في بناية الشقق 5 بلوواترز ريزيدينسز جزيرة بلوواترز‬ 4 غرف 899000 درهم - 5768694',
+        title_l1: 'شقة في بناية الشقق 5 بلوواترز ريزيدينسز جزيرة بلوواترز‬ 4 غرف 899000 درهم - 5768694',
         externalID: '5768694',
         slug: 'sea-sunset-facing-beautiful-view-furnished-5768694',
         slug_l1: 'sea-sunset-facing-beautiful-view-furnished-5768694',
@@ -2129,8 +2095,7 @@ const dummy = [
                 name: 'Apartment Building 5',
                 name_l1: 'بناية الشقق 5',
                 slug: '/dubai/bluewaters-island/bluewaters-residences/apartment-building-5',
-                slug_l1:
-                    '/dubai/bluewaters-island/bluewaters-residences/apartment-building-5',
+                slug_l1: '/dubai/bluewaters-island/bluewaters-residences/apartment-building-5',
             },
         ],
         category: [
@@ -2277,10 +2242,8 @@ const dummy = [
         indyScore_l1: 87,
         hasMatchingFloorPlans: false,
         photoIDs: [
-            190393380, 193446293, 190393376, 193446294, 193446295, 190393375,
-            190393388, 190393390, 193446297, 190393377, 193446298, 190393386,
-            193446299, 190393378, 193446300, 193446301, 190393385, 193446302,
-            193446305, 190393392, 190393394, 190393396,
+            190393380, 193446293, 190393376, 193446294, 193446295, 190393375, 190393388, 190393390, 193446297, 190393377, 193446298, 190393386,
+            193446299, 190393378, 193446300, 193446301, 190393385, 193446302, 193446305, 190393392, 190393394, 190393396,
         ],
         hidePrice: false,
         objectID: '3035003',
@@ -2524,12 +2487,10 @@ const dummy = [
         referenceNumber: '1048-Ap-R-0238',
         permitNumber: null,
         title: 'Luxurious 4BR Sky Collection | Full Fountain and Burj Khalifa view',
-        title_l1:
-            'شقة في العنوان رزيدنس فاونتن فيوز سكاي كوليكشن 1 العنوان رزيدنس فاونتن فيوز وسط مدينة دبي 4 غرف 875000 درهم - 5681756',
+        title_l1: 'شقة في العنوان رزيدنس فاونتن فيوز سكاي كوليكشن 1 العنوان رزيدنس فاونتن فيوز وسط مدينة دبي 4 غرف 875000 درهم - 5681756',
         externalID: '5681756',
         slug: 'luxurious-4br-sky-collection-full-fountain-and-burj-khalifa-view-5681756',
-        slug_l1:
-            'luxurious-4br-sky-collection-full-fountain-and-burj-khalifa-view-5681756',
+        slug_l1: 'luxurious-4br-sky-collection-full-fountain-and-burj-khalifa-view-5681756',
         location: [
             {
                 id: 1,
@@ -2565,8 +2526,7 @@ const dummy = [
                 name: 'The Address Residence Fountain Views',
                 name_l1: 'العنوان رزيدنس فاونتن فيوز',
                 slug: '/dubai/downtown-dubai/the-address-residence-fountain-views',
-                slug_l1:
-                    '/dubai/downtown-dubai/the-address-residence-fountain-views',
+                slug_l1: '/dubai/downtown-dubai/the-address-residence-fountain-views',
             },
             {
                 id: 1557,
@@ -2575,8 +2535,7 @@ const dummy = [
                 name: 'The Address Fountain Views Sky Collection 1',
                 name_l1: 'العنوان رزيدنس فاونتن فيوز سكاي كوليكشن 1',
                 slug: '/dubai/downtown-dubai/the-address-residence-fountain-views/the-address-fountain-views-sky-collection-1',
-                slug_l1:
-                    '/dubai/downtown-dubai/the-address-residence-fountain-views/the-address-fountain-views-sky-collection-1',
+                slug_l1: '/dubai/downtown-dubai/the-address-residence-fountain-views/the-address-fountain-views-sky-collection-1',
             },
         ],
         category: [
@@ -2658,16 +2617,7 @@ const dummy = [
             commercialNumber: null,
         },
         hash: '8f4fc45',
-        keywords: [
-            '4 غرف',
-            'guest',
-            'مطبخ',
-            'مجلس',
-            'mall',
-            'kitchen',
-            '4 bedroom',
-            'مول',
-        ],
+        keywords: ['4 غرف', 'guest', 'مطبخ', 'مجلس', 'mall', 'kitchen', '4 bedroom', 'مول'],
         isVerified: false,
         verification: {
             updatedAt: 1643026841.820056,
@@ -2688,16 +2638,11 @@ const dummy = [
         indyScore_l1: 90,
         hasMatchingFloorPlans: false,
         photoIDs: [
-            187967446, 190476394, 187976106, 187976114, 190476396, 193721343,
-            193721344, 190476400, 187967454, 187967455, 190476405, 193721345,
-            187976166, 187976169, 187976173, 187976176, 190476408, 187967463,
-            187976188, 187967465, 193721346, 190476413, 187967468, 187976206,
-            190476414, 187976212, 193721347, 187967478, 187976224, 187976227,
-            187976230, 190476416, 190476417, 193721348, 187976241, 187967657,
-            187976247, 187976249, 187976252, 193721349, 190476427, 190476431,
-            193721350, 193721351, 190476444, 187976272, 190476449, 190476451,
-            193721352, 187968289, 190476459, 190476461, 187968294, 187968295,
-            187976298,
+            187967446, 190476394, 187976106, 187976114, 190476396, 193721343, 193721344, 190476400, 187967454, 187967455, 190476405, 193721345,
+            187976166, 187976169, 187976173, 187976176, 190476408, 187967463, 187976188, 187967465, 193721346, 190476413, 187967468, 187976206,
+            190476414, 187976212, 193721347, 187967478, 187976224, 187976227, 187976230, 190476416, 190476417, 193721348, 187976241, 187967657,
+            187976247, 187976249, 187976252, 193721349, 190476427, 190476431, 193721350, 193721351, 190476444, 187976272, 190476449, 190476451,
+            193721352, 187968289, 190476459, 190476461, 187968294, 187968295, 187976298,
         ],
         hidePrice: false,
         objectID: '2941607',
@@ -2791,8 +2736,7 @@ const dummy = [
         referenceNumber: '1371-Ap-S-0300',
         permitNumber: '7117766811',
         title: 'Best 4BR | High Floor | Burj and Fountain Views',
-        title_l1:
-            'شقة في العنوان رزيدنس فاونتن فيوز 1 العنوان رزيدنس فاونتن فيوز وسط مدينة دبي 4 غرف 850000 درهم - 4878420',
+        title_l1: 'شقة في العنوان رزيدنس فاونتن فيوز 1 العنوان رزيدنس فاونتن فيوز وسط مدينة دبي 4 غرف 850000 درهم - 4878420',
         externalID: '4878420',
         slug: 'best-4br-high-floor-burj-and-fountain-views-4878420',
         slug_l1: 'best-4br-high-floor-burj-and-fountain-views-4878420',
@@ -2831,8 +2775,7 @@ const dummy = [
                 name: 'The Address Residence Fountain Views',
                 name_l1: 'العنوان رزيدنس فاونتن فيوز',
                 slug: '/dubai/downtown-dubai/the-address-residence-fountain-views',
-                slug_l1:
-                    '/dubai/downtown-dubai/the-address-residence-fountain-views',
+                slug_l1: '/dubai/downtown-dubai/the-address-residence-fountain-views',
             },
             {
                 id: 1227,
@@ -2841,8 +2784,7 @@ const dummy = [
                 name: 'The Address Fountain Views 1',
                 name_l1: 'العنوان رزيدنس فاونتن فيوز 1',
                 slug: '/dubai/downtown-dubai/the-address-residence-fountain-views/the-address-fountain-views-1',
-                slug_l1:
-                    '/dubai/downtown-dubai/the-address-residence-fountain-views/the-address-fountain-views-1',
+                slug_l1: '/dubai/downtown-dubai/the-address-residence-fountain-views/the-address-fountain-views-1',
             },
         ],
         category: [
@@ -2978,10 +2920,8 @@ const dummy = [
         indyScore_l1: 27,
         hasMatchingFloorPlans: false,
         photoIDs: [
-            169795837, 169795879, 169795891, 169795911, 169795918, 169795927,
-            169795933, 169795942, 169795951, 169795960, 169795963, 169795966,
-            169795976, 169795981, 169795999, 169796012, 169796022, 169796031,
-            169796044,
+            169795837, 169795879, 169795891, 169795911, 169795918, 169795927, 169795933, 169795942, 169795951, 169795960, 169795963, 169795966,
+            169795976, 169795981, 169795999, 169796012, 169796022, 169796031, 169796044,
         ],
         hidePrice: false,
         objectID: '2138902',
@@ -3185,8 +3125,7 @@ const dummy = [
         referenceNumber: 'REAP-R-1149',
         permitNumber: '6546482334',
         title: '3BR FULL PANORAMIC SEA VIEWS | READY TO MOVE IN',
-        title_l1:
-            'شقة في العنوان ريزدنسز جميرا منتجع و سبا جميرا بيتش ريزيدنس 3 غرف 850000 درهم - 5940783',
+        title_l1: 'شقة في العنوان ريزدنسز جميرا منتجع و سبا جميرا بيتش ريزيدنس 3 غرف 850000 درهم - 5940783',
         externalID: '5940783',
         slug: '3br-full-panoramic-sea-views-ready-to-move-in-5940783',
         slug_l1: '3br-full-panoramic-sea-views-ready-to-move-in-5940783',
@@ -3225,8 +3164,7 @@ const dummy = [
                 name: 'The Address Residences Jumeirah Resort and Spa',
                 name_l1: 'العنوان ريزدنسز جميرا منتجع و سبا',
                 slug: '/dubai/jumeirah-beach-residence-jbr/the-address-residences-jumeirah-resort-and-spa',
-                slug_l1:
-                    '/dubai/jumeirah-beach-residence-jbr/the-address-residences-jumeirah-resort-and-spa',
+                slug_l1: '/dubai/jumeirah-beach-residence-jbr/the-address-residences-jumeirah-resort-and-spa',
             },
         ],
         category: [
@@ -3365,8 +3303,7 @@ const dummy = [
         indyScore_l1: 68,
         hasMatchingFloorPlans: false,
         photoIDs: [
-            212109021, 212109022, 212109023, 212109024, 212109025, 212109026,
-            212109027, 212109028, 212109029, 212109030, 212109031, 212109032,
+            212109021, 212109022, 212109023, 212109024, 212109025, 212109026, 212109027, 212109028, 212109029, 212109030, 212109031, 212109032,
             212109033, 212109034,
         ],
         hidePrice: false,
@@ -3571,8 +3508,7 @@ const dummy = [
         referenceNumber: 'DUB203528_L',
         permitNumber: '0452462281',
         title: 'Stunning Views | Prime Location | Easy to View',
-        title_l1:
-            'شقة في العنوان ريزدينسز سكاي فيو 2 العنوان رزيدنس سكاي فيو وسط مدينة دبي 4 غرف 850000 درهم - 4594166',
+        title_l1: 'شقة في العنوان ريزدينسز سكاي فيو 2 العنوان رزيدنس سكاي فيو وسط مدينة دبي 4 غرف 850000 درهم - 4594166',
         externalID: '4594166',
         slug: 'stunning-views-prime-location-easy-to-view-4594166',
         slug_l1: 'stunning-views-prime-location-easy-to-view-4594166',
@@ -3620,8 +3556,7 @@ const dummy = [
                 name: 'The Address Sky View Tower 2',
                 name_l1: 'العنوان ريزدينسز سكاي فيو 2',
                 slug: '/dubai/downtown-dubai/the-address-sky-view-towers/the-address-sky-view-tower-2',
-                slug_l1:
-                    '/dubai/downtown-dubai/the-address-sky-view-towers/the-address-sky-view-tower-2',
+                slug_l1: '/dubai/downtown-dubai/the-address-sky-view-towers/the-address-sky-view-tower-2',
             },
         ],
         category: [
@@ -3706,20 +3641,7 @@ const dummy = [
             commercialNumber: null,
         },
         hash: 'd0c02e6',
-        keywords: [
-            'مفروش',
-            'مؤثثة',
-            '4 غرف',
-            'مطبخ',
-            'مفروشة',
-            'furnished',
-            'serviced',
-            'مخدوم',
-            'kitchen',
-            'terrace',
-            'ترس',
-            '4 bedroom',
-        ],
+        keywords: ['مفروش', 'مؤثثة', '4 غرف', 'مطبخ', 'مفروشة', 'furnished', 'serviced', 'مخدوم', 'kitchen', 'terrace', 'ترس', '4 bedroom'],
         isVerified: false,
         verification: {
             updatedAt: 1599657708.985741,
@@ -3740,8 +3662,7 @@ const dummy = [
         indyScore_l1: 60,
         hasMatchingFloorPlans: false,
         photoIDs: [
-            168814778, 168814819, 168814824, 168814832, 168814835, 168814840,
-            168814844, 168814857, 168814865, 168814874, 168814885, 168814909,
+            168814778, 168814819, 168814824, 168814832, 168814835, 168814840, 168814844, 168814857, 168814865, 168814874, 168814885, 168814909,
             168814913, 168814932, 168814944,
         ],
         hidePrice: false,
@@ -3856,8 +3777,7 @@ const dummy = [
         referenceNumber: 'RENT020315',
         permitNumber: '0274758673',
         title: 'Luxurious Living / Brand New / Private Beach',
-        title_l1:
-            'شقة في سانرايز باي إعمار الواجهة المائية دبي هاربور‬ 4 غرف 850000 درهم - 5964162',
+        title_l1: 'شقة في سانرايز باي إعمار الواجهة المائية دبي هاربور‬ 4 غرف 850000 درهم - 5964162',
         externalID: '5964162',
         slug: 'luxurious-living-brand-new-private-beach-5964162',
         slug_l1: 'luxurious-living-brand-new-private-beach-5964162',
@@ -4040,10 +3960,7 @@ const dummy = [
         indyScore: 103,
         indyScore_l1: 103,
         hasMatchingFloorPlans: false,
-        photoIDs: [
-            215368505, 215368506, 215368507, 215368508, 215368509, 215368510,
-            215368511, 215368512, 215368513, 215368514, 215368515,
-        ],
+        photoIDs: [215368505, 215368506, 215368507, 215368508, 215368509, 215368510, 215368511, 215368512, 215368513, 215368514, 215368515],
         hidePrice: false,
         objectID: '3246320',
         _highlightResult: {
@@ -4231,8 +4148,7 @@ const dummy = [
         referenceNumber: 'B-AR-57723',
         permitNumber: '7135323838',
         title: '3 Bedroom Hotel Apartment for Rent',
-        title_l1:
-            'شقة في العنوان ريزدنسز جميرا منتجع و سبا جميرا بيتش ريزيدنس 3 غرف 849990 درهم - 5342111',
+        title_l1: 'شقة في العنوان ريزدنسز جميرا منتجع و سبا جميرا بيتش ريزيدنس 3 غرف 849990 درهم - 5342111',
         externalID: '5342111',
         slug: '3-bedroom-hotel-apartment-for-rent-5342111',
         slug_l1: '3-bedroom-hotel-apartment-for-rent-5342111',
@@ -4271,8 +4187,7 @@ const dummy = [
                 name: 'The Address Residences Jumeirah Resort and Spa',
                 name_l1: 'العنوان ريزدنسز جميرا منتجع و سبا',
                 slug: '/dubai/jumeirah-beach-residence-jbr/the-address-residences-jumeirah-resort-and-spa',
-                slug_l1:
-                    '/dubai/jumeirah-beach-residence-jbr/the-address-residences-jumeirah-resort-and-spa',
+                slug_l1: '/dubai/jumeirah-beach-residence-jbr/the-address-residences-jumeirah-resort-and-spa',
             },
         ],
         category: [
@@ -4416,10 +4331,7 @@ const dummy = [
         indyScore: 92,
         indyScore_l1: 92,
         hasMatchingFloorPlans: false,
-        photoIDs: [
-            172342847, 192872122, 172342844, 172342845, 172342843, 192872124,
-            192872125, 172342846, 192872126, 192872127, 192872128,
-        ],
+        photoIDs: [172342847, 192872122, 172342844, 172342845, 172342843, 192872124, 192872125, 172342846, 192872126, 192872127, 192872128],
         hidePrice: false,
         objectID: '2610088',
         _highlightResult: {
@@ -4657,8 +4569,7 @@ const dummy = [
         referenceNumber: 'B-AR-60824',
         permitNumber: '7135326658',
         title: 'Vacant | Serviced | High Floor | Sea View | S3A',
-        title_l1:
-            'شقة في العنوان ريزدنسز جميرا منتجع و سبا جميرا بيتش ريزيدنس 3 غرف 849888 درهم - 5491015',
+        title_l1: 'شقة في العنوان ريزدنسز جميرا منتجع و سبا جميرا بيتش ريزيدنس 3 غرف 849888 درهم - 5491015',
         externalID: '5491015',
         slug: 'vacant-serviced-high-floor-sea-view-s3a-5491015',
         slug_l1: 'vacant-serviced-high-floor-sea-view-s3a-5491015',
@@ -4697,8 +4608,7 @@ const dummy = [
                 name: 'The Address Residences Jumeirah Resort and Spa',
                 name_l1: 'العنوان ريزدنسز جميرا منتجع و سبا',
                 slug: '/dubai/jumeirah-beach-residence-jbr/the-address-residences-jumeirah-resort-and-spa',
-                slug_l1:
-                    '/dubai/jumeirah-beach-residence-jbr/the-address-residences-jumeirah-resort-and-spa',
+                slug_l1: '/dubai/jumeirah-beach-residence-jbr/the-address-residences-jumeirah-resort-and-spa',
             },
         ],
         category: [
@@ -4850,10 +4760,8 @@ const dummy = [
         indyScore_l1: 130,
         hasMatchingFloorPlans: false,
         photoIDs: [
-            169332777, 169332801, 169332814, 169332828, 169332857, 169332869,
-            169332881, 169332891, 169332895, 169332904, 169332916, 169332933,
-            169332942, 169332952, 169332970, 169333002, 169333015, 169333029,
-            169333038, 169333052, 169333061, 169333071, 169333086,
+            169332777, 169332801, 169332814, 169332828, 169332857, 169332869, 169332881, 169332891, 169332895, 169332904, 169332916, 169332933,
+            169332942, 169332952, 169332970, 169333002, 169333015, 169333029, 169333038, 169333052, 169333061, 169333071, 169333086,
         ],
         hidePrice: false,
         objectID: '2753487',
@@ -5127,12 +5035,10 @@ const dummy = [
         referenceNumber: '914-Ap-R-0404',
         permitNumber: '7124292000',
         title: 'Unique l Fully Upgraded Luxury Apartment l Blue Waters',
-        title_l1:
-            'شقة في بناية الشقق 8 بلوواترز ريزيدينسز جزيرة بلوواترز‬ 3 غرف 800000 درهم - 5928987',
+        title_l1: 'شقة في بناية الشقق 8 بلوواترز ريزيدينسز جزيرة بلوواترز‬ 3 غرف 800000 درهم - 5928987',
         externalID: '5928987',
         slug: 'unique-l-fully-upgraded-luxury-apartment-l-blue-waters-5928987',
-        slug_l1:
-            'unique-l-fully-upgraded-luxury-apartment-l-blue-waters-5928987',
+        slug_l1: 'unique-l-fully-upgraded-luxury-apartment-l-blue-waters-5928987',
         location: [
             {
                 id: 1,
@@ -5177,8 +5083,7 @@ const dummy = [
                 name: 'Apartment Building 8',
                 name_l1: 'بناية الشقق 8',
                 slug: '/dubai/bluewaters-island/bluewaters-residences/apartment-building-8',
-                slug_l1:
-                    '/dubai/bluewaters-island/bluewaters-residences/apartment-building-8',
+                slug_l1: '/dubai/bluewaters-island/bluewaters-residences/apartment-building-8',
             },
         ],
         category: [
@@ -5324,10 +5229,8 @@ const dummy = [
         indyScore_l1: 387,
         hasMatchingFloorPlans: false,
         photoIDs: [
-            212789775, 212789776, 212789777, 212789778, 212789779, 212789780,
-            212789781, 212789782, 212789783, 215512513, 212789785, 212789786,
-            212789787, 214676810, 212789789, 214049285, 212789791, 214049287,
-            212789793, 212789794, 212789795, 216485189, 214049292, 212789798,
+            212789775, 212789776, 212789777, 212789778, 212789779, 212789780, 212789781, 212789782, 212789783, 215512513, 212789785, 212789786,
+            212789787, 214676810, 212789789, 214049285, 212789791, 214049287, 212789793, 212789794, 212789795, 216485189, 214049292, 212789798,
             212789799, 212789800,
         ],
         hidePrice: false,
@@ -5562,8 +5465,7 @@ const dummy = [
         referenceNumber: 'BST222294_L',
         permitNumber: '6731322060',
         title: 'Luxury I 1 Bedroom I  Vacant I Furnished',
-        title_l1:
-            'شقة في برج فولانتي الخليج التجاري 1 غرف 800000 درهم - 5842565',
+        title_l1: 'شقة في برج فولانتي الخليج التجاري 1 غرف 800000 درهم - 5842565',
         externalID: '5842565',
         slug: 'luxury-i-1-bedroom-i-vacant-i-furnished-5842565',
         slug_l1: 'luxury-i-1-bedroom-i-vacant-i-furnished-5842565',
@@ -5730,10 +5632,8 @@ const dummy = [
         indyScore_l1: 174,
         hasMatchingFloorPlans: false,
         photoIDs: [
-            196470157, 196470158, 196470159, 196470160, 196470161, 196470162,
-            196470163, 196470164, 196470165, 196470166, 196470167, 196470168,
-            196470169, 196470170, 196470171, 196470172, 196470173, 196470174,
-            196470175, 196470176, 197170465, 197170466, 197170468, 197170470,
+            196470157, 196470158, 196470159, 196470160, 196470161, 196470162, 196470163, 196470164, 196470165, 196470166, 196470167, 196470168,
+            196470169, 196470170, 196470171, 196470172, 196470173, 196470174, 196470175, 196470176, 197170465, 197170466, 197170468, 197170470,
             197170472, 197170474, 197170476, 197170477, 197170478, 197170479,
         ],
         hidePrice: false,
@@ -5868,8 +5768,7 @@ const dummy = [
         referenceNumber: 'DUB196045_L',
         permitNumber: '7117775705',
         title: '3 Bed Duplex | Versace Furnishings | Private Pool',
-        title_l1:
-            'شقة في بالازو فيرساتشي قرية التراث 3 غرف 800000 درهم - 5889399',
+        title_l1: 'شقة في بالازو فيرساتشي قرية التراث 3 غرف 800000 درهم - 5889399',
         externalID: '5889399',
         slug: '3-bed-duplex-versace-furnishings-private-pool-5889399',
         slug_l1: '3-bed-duplex-versace-furnishings-private-pool-5889399',
@@ -6041,10 +5940,7 @@ const dummy = [
         indyScore: 261,
         indyScore_l1: 261,
         hasMatchingFloorPlans: false,
-        photoIDs: [
-            203217440, 203217442, 203217444, 203217446, 203217448, 203217450,
-            203217451, 203217453, 203217455, 203217457,
-        ],
+        photoIDs: [203217440, 203217442, 203217444, 203217446, 203217448, 203217450, 203217451, 203217453, 203217455, 203217457],
         hidePrice: false,
         objectID: '3169558',
         _highlightResult: {
@@ -6222,8 +6118,7 @@ const dummy = [
         referenceNumber: 'DP-R-44582',
         permitNumber: '7131616533',
         title: 'High Floor and Furnished Apt | Burj View',
-        title_l1:
-            'شقة في العنوان ريزدينسز سكاي فيو 2 العنوان رزيدنس سكاي فيو وسط مدينة دبي 3 غرف 800000 درهم - 5866276',
+        title_l1: 'شقة في العنوان ريزدينسز سكاي فيو 2 العنوان رزيدنس سكاي فيو وسط مدينة دبي 3 غرف 800000 درهم - 5866276',
         externalID: '5866276',
         slug: 'high-floor-and-furnished-apt-burj-view-5866276',
         slug_l1: 'high-floor-and-furnished-apt-burj-view-5866276',
@@ -6271,8 +6166,7 @@ const dummy = [
                 name: 'The Address Sky View Tower 2',
                 name_l1: 'العنوان ريزدينسز سكاي فيو 2',
                 slug: '/dubai/downtown-dubai/the-address-sky-view-towers/the-address-sky-view-tower-2',
-                slug_l1:
-                    '/dubai/downtown-dubai/the-address-sky-view-towers/the-address-sky-view-tower-2',
+                slug_l1: '/dubai/downtown-dubai/the-address-sky-view-towers/the-address-sky-view-tower-2',
             },
         ],
         category: [
@@ -6402,10 +6296,8 @@ const dummy = [
         indyScore_l1: 212,
         hasMatchingFloorPlans: false,
         photoIDs: [
-            199478209, 199478211, 199478213, 199478217, 199478219, 199478221,
-            199478223, 199478225, 199478228, 199478231, 199478234, 199478237,
-            199478240, 199478241, 199478243, 199478244, 199478246, 199478247,
-            199478248, 199478249, 199478250, 199478251, 199478253, 199478254,
+            199478209, 199478211, 199478213, 199478217, 199478219, 199478221, 199478223, 199478225, 199478228, 199478231, 199478234, 199478237,
+            199478240, 199478241, 199478243, 199478244, 199478246, 199478247, 199478248, 199478249, 199478250, 199478251, 199478253, 199478254,
             199478255, 199478258, 199478259, 199478262, 199478264, 199478266,
         ],
         hidePrice: false,
@@ -6570,8 +6462,7 @@ const dummy = [
         referenceNumber: 'DUB220294_L',
         permitNumber: '7124145300',
         title: 'Sea view l Luxury Living l Fully Furnished',
-        title_l1:
-            'شقة في بناية الشقق 8 بلوواترز ريزيدينسز جزيرة بلوواترز‬ 4 غرف 800000 درهم - 5815541',
+        title_l1: 'شقة في بناية الشقق 8 بلوواترز ريزيدينسز جزيرة بلوواترز‬ 4 غرف 800000 درهم - 5815541',
         externalID: '5815541',
         slug: 'sea-view-l-luxury-living-l-fully-furnished-5815541',
         slug_l1: 'sea-view-l-luxury-living-l-fully-furnished-5815541',
@@ -6619,8 +6510,7 @@ const dummy = [
                 name: 'Apartment Building 8',
                 name_l1: 'بناية الشقق 8',
                 slug: '/dubai/bluewaters-island/bluewaters-residences/apartment-building-8',
-                slug_l1:
-                    '/dubai/bluewaters-island/bluewaters-residences/apartment-building-8',
+                slug_l1: '/dubai/bluewaters-island/bluewaters-residences/apartment-building-8',
             },
         ],
         category: [
@@ -6755,10 +6645,8 @@ const dummy = [
         indyScore_l1: 143,
         hasMatchingFloorPlans: false,
         photoIDs: [
-            202583038, 202583056, 202583066, 202583079, 202583093, 202583107,
-            202583119, 202583126, 202583138, 202583145, 202583151, 202583162,
-            202583167, 202583176, 202583184, 202583192, 202583202, 202583210,
-            202583220, 202583229, 202583237, 202583245, 202583249, 202583259,
+            202583038, 202583056, 202583066, 202583079, 202583093, 202583107, 202583119, 202583126, 202583138, 202583145, 202583151, 202583162,
+            202583167, 202583176, 202583184, 202583192, 202583202, 202583210, 202583220, 202583229, 202583237, 202583245, 202583249, 202583259,
             202583271, 202583279,
         ],
         hidePrice: false,
@@ -6943,8 +6831,7 @@ const dummy = [
         referenceNumber: 'RL-25309',
         permitNumber: '7148949808',
         title: 'Stunning Sea view | Fully Furnished | Luxury',
-        title_l1:
-            'شقة في بناية الشقق 3 بلوواترز ريزيدينسز جزيرة بلوواترز‬ 4 غرف 800000 درهم - 5476622',
+        title_l1: 'شقة في بناية الشقق 3 بلوواترز ريزيدينسز جزيرة بلوواترز‬ 4 غرف 800000 درهم - 5476622',
         externalID: '5476622',
         slug: 'stunning-sea-view-fully-furnished-luxury-5476622',
         slug_l1: 'stunning-sea-view-fully-furnished-luxury-5476622',
@@ -6992,8 +6879,7 @@ const dummy = [
                 name: 'Apartment Building 3',
                 name_l1: 'بناية الشقق 3',
                 slug: '/dubai/bluewaters-island/bluewaters-residences/apartment-building-3',
-                slug_l1:
-                    '/dubai/bluewaters-island/bluewaters-residences/apartment-building-3',
+                slug_l1: '/dubai/bluewaters-island/bluewaters-residences/apartment-building-3',
             },
         ],
         category: [
@@ -7130,8 +7016,7 @@ const dummy = [
         indyScore_l1: 50,
         hasMatchingFloorPlans: false,
         photoIDs: [
-            168986516, 168986530, 168986532, 168986502, 168986536, 168986549,
-            168986554, 168986562, 168986568, 168986620, 168986635, 168986650,
+            168986516, 168986530, 168986532, 168986502, 168986536, 168986549, 168986554, 168986562, 168986568, 168986620, 168986635, 168986650,
             168986682, 168986689, 168986695, 168986698, 168986702, 168986706,
         ],
         hidePrice: false,
@@ -7326,8 +7211,7 @@ const dummy = [
         referenceNumber: '1173-Ap-R-2710',
         permitNumber: null,
         title: '4 BEDROOM  APARTMENT IN SKY VIEW',
-        title_l1:
-            'شقة في العنوان رزيدنس سكاي فيو وسط مدينة دبي 4 غرف 800000 درهم - 5697996',
+        title_l1: 'شقة في العنوان رزيدنس سكاي فيو وسط مدينة دبي 4 غرف 800000 درهم - 5697996',
         externalID: '5697996',
         slug: '4-bedroom-apartment-in-sky-view-5697996',
         slug_l1: '4-bedroom-apartment-in-sky-view-5697996',
@@ -7449,14 +7333,7 @@ const dummy = [
             commercialNumber: null,
         },
         hash: '3719bfd',
-        keywords: [
-            'للعوائل',
-            'family',
-            '4 غرف',
-            '4 غرف نوم',
-            'عوائل',
-            '4 bedroom',
-        ],
+        keywords: ['للعوائل', 'family', '4 غرف', '4 غرف نوم', 'عوائل', '4 bedroom'],
         isVerified: false,
         verification: {
             updatedAt: 1643616497.134158,
@@ -7476,10 +7353,7 @@ const dummy = [
         indyScore: 18,
         indyScore_l1: 18,
         hasMatchingFloorPlans: false,
-        photoIDs: [
-            184340520, 185347293, 183510811, 183509097, 183510815, 184345321,
-            183510818, 183510819, 184340528,
-        ],
+        photoIDs: [184340520, 185347293, 183510811, 183509097, 183510815, 184345321, 183510818, 183510819, 184340528],
         hidePrice: false,
         objectID: '2958006',
         _highlightResult: {
@@ -7562,8 +7436,7 @@ const dummy = [
         referenceNumber: 'RENT020208',
         permitNumber: '7148989470',
         title: 'Fully Furnished / All Bills Includ / Dubai Eye View',
-        title_l1:
-            'شقة في بناية الشقق 8 بلوواترز ريزيدينسز جزيرة بلوواترز‬ 3 غرف 800000 درهم - 5934406',
+        title_l1: 'شقة في بناية الشقق 8 بلوواترز ريزيدينسز جزيرة بلوواترز‬ 3 غرف 800000 درهم - 5934406',
         externalID: '5934406',
         slug: 'fully-furnished-all-bills-includ-dubai-eye-view-5934406',
         slug_l1: 'fully-furnished-all-bills-includ-dubai-eye-view-5934406',
@@ -7611,8 +7484,7 @@ const dummy = [
                 name: 'Apartment Building 8',
                 name_l1: 'بناية الشقق 8',
                 slug: '/dubai/bluewaters-island/bluewaters-residences/apartment-building-8',
-                slug_l1:
-                    '/dubai/bluewaters-island/bluewaters-residences/apartment-building-8',
+                slug_l1: '/dubai/bluewaters-island/bluewaters-residences/apartment-building-8',
             },
         ],
         category: [
@@ -7753,8 +7625,7 @@ const dummy = [
         indyScore_l1: 460,
         hasMatchingFloorPlans: false,
         photoIDs: [
-            211065340, 211065341, 211065342, 211065343, 211065344, 211065345,
-            211065346, 211065347, 211065348, 211065349, 211065350, 211065351,
+            211065340, 211065341, 211065342, 211065343, 211065344, 211065345, 211065346, 211065347, 211065348, 211065349, 211065350, 211065351,
             211065352, 211065353, 211065354, 211065355,
         ],
         hidePrice: false,
@@ -7974,8 +7845,7 @@ const dummy = [
         referenceNumber: 'RENT020134',
         permitNumber: '7117775565',
         title: 'All Bills Incl / Private Swimming Pool / Luxury',
-        title_l1:
-            'شقة في بالازو فيرساتشي قرية التراث 3 غرف 800000 درهم - 5895881',
+        title_l1: 'شقة في بالازو فيرساتشي قرية التراث 3 غرف 800000 درهم - 5895881',
         externalID: '5895881',
         slug: 'all-bills-incl-private-swimming-pool-luxury-5895881',
         slug_l1: 'all-bills-incl-private-swimming-pool-luxury-5895881',
@@ -8143,10 +8013,8 @@ const dummy = [
         indyScore_l1: 305,
         hasMatchingFloorPlans: false,
         photoIDs: [
-            204345290, 204345291, 204345292, 204345293, 204345294, 204345295,
-            204345296, 204345297, 204345298, 204345299, 204345300, 204345301,
-            204345302, 204345303, 204345304, 204345305, 204345306, 204345307,
-            204345308, 204345309, 204345310, 204345311, 204345312, 204345313,
+            204345290, 204345291, 204345292, 204345293, 204345294, 204345295, 204345296, 204345297, 204345298, 204345299, 204345300, 204345301,
+            204345302, 204345303, 204345304, 204345305, 204345306, 204345307, 204345308, 204345309, 204345310, 204345311, 204345312, 204345313,
             204345314, 204345315, 204345316, 204345317, 204345318, 204345319,
         ],
         hidePrice: false,
@@ -8301,8 +8169,7 @@ const dummy = [
         referenceNumber: 'HRA-R-1792',
         permitNumber: '7117775705',
         title: 'Upcoming in July| Duplex |Private Pool |Furnished',
-        title_l1:
-            'شقة في بالازو فيرساتشي قرية التراث 3 غرف 800000 درهم - 5937208',
+        title_l1: 'شقة في بالازو فيرساتشي قرية التراث 3 غرف 800000 درهم - 5937208',
         externalID: '5937208',
         slug: 'upcoming-in-july-duplex-private-pool-furnished-5937208',
         slug_l1: 'upcoming-in-july-duplex-private-pool-furnished-5937208',
@@ -8486,8 +8353,7 @@ const dummy = [
         indyScore_l1: 279,
         hasMatchingFloorPlans: false,
         photoIDs: [
-            211488456, 211488457, 211488458, 211488459, 211488460, 211488461,
-            211488462, 211488463, 211488464, 211488465, 211488467, 211488468,
+            211488456, 211488457, 211488458, 211488459, 211488460, 211488461, 211488462, 211488463, 211488464, 211488465, 211488467, 211488468,
             212978657, 212978658, 212978659, 212978660,
         ],
         hidePrice: false,
@@ -8717,8 +8583,7 @@ const dummy = [
         referenceNumber: 'FPRE-A001',
         permitNumber: '7179785680',
         title: 'Burj Khalifa View/High Floor (Furnished)',
-        title_l1:
-            'شقة في فيدا ريزيدنس داون تاون وسط مدينة دبي 4 غرف 800000 درهم - 5948131',
+        title_l1: 'شقة في فيدا ريزيدنس داون تاون وسط مدينة دبي 4 غرف 800000 درهم - 5948131',
         externalID: '5948131',
         slug: 'burj-khalifa-view-high-floor-furnished-5948131',
         slug_l1: 'burj-khalifa-view-high-floor-furnished-5948131',
@@ -8879,8 +8744,7 @@ const dummy = [
         indyScore_l1: 525,
         hasMatchingFloorPlans: false,
         photoIDs: [
-            213162116, 213162117, 213162118, 213162119, 213162120, 213162121,
-            213162122, 213162123, 213162124, 213162125, 213162126, 213162127,
+            213162116, 213162117, 213162118, 213162119, 213162120, 213162121, 213162122, 213162123, 213162124, 213162125, 213162126, 213162127,
             213162128,
         ],
         hidePrice: false,
@@ -8987,4 +8851,4 @@ const dummy = [
             ],
         },
     },
-];
+]

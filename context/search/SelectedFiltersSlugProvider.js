@@ -1,40 +1,33 @@
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react'
 
-const SelectedFiltersSlugContext = createContext();
-import { useRouter } from 'next/router';
+const SelectedFiltersSlugContext = createContext()
+import { useRouter } from 'next/router'
 
 const SelectedFiltersSlugProvider = ({ children }) => {
-    const [selectedFiltersSlug, setSelectedFiltersSlug] = useState({});
-    const [searchSlug, setSearchSlug] = useState('');
+    const [selectedFiltersSlug, setSelectedFiltersSlug] = useState({})
+    const [searchSlug, setSearchSlug] = useState('')
+    const router = useRouter()
+
     useEffect(() => {
         setSearchSlug(
             Object.keys(selectedFiltersSlug)
-                .map((key) =>
-                    selectedFiltersSlug[key] !== ''
-                        ? `${key}=${selectedFiltersSlug[key]}`
-                        : ''
-                )
+                .map(key => (selectedFiltersSlug[key] !== '' ? `${key}=${selectedFiltersSlug[key]}` : ''))
                 .join('&')
-        );
-    }, [selectedFiltersSlug]);
+        )
+    }, [selectedFiltersSlug])
 
-
-    const {pathname , replace: routeReplace } = useRouter()
+    const { pathname, replace: routeReplace } = router
     useEffect(() => {
-        console.log(searchSlug);
         routeReplace(`${pathname}?${searchSlug}`)
-    }, [searchSlug]);
+    }, [searchSlug])
 
     return (
-        <SelectedFiltersSlugContext.Provider
-            value={{ selectedFiltersSlug, setSelectedFiltersSlug, searchSlug }}
-        >
+        <SelectedFiltersSlugContext.Provider value={{ selectedFiltersSlug, setSelectedFiltersSlug, searchSlug }}>
             {children}
         </SelectedFiltersSlugContext.Provider>
-    );
-};
+    )
+}
 
-export default SelectedFiltersSlugProvider;
+export default SelectedFiltersSlugProvider
 
-export const useSelectedFiltersSlug = () =>
-    useContext(SelectedFiltersSlugContext);
+export const useSelectedFiltersSlug = () => useContext(SelectedFiltersSlugContext)

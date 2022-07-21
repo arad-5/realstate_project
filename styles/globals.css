@@ -4,7 +4,10 @@
 
 @layer base {
     html.dark body {
-        @apply transition-colors bg-neutral-900 text-white;
+        @apply bg-neutral-900 text-white transition-colors;
+    }
+    li {
+        margin: 0;
     }
     .property-card:hover .property-card-image {
         @apply shadow-md sm:-translate-y-2;
@@ -19,5 +22,20 @@
         background-color: #fff;
         color: #fff;
         display: none !important;
+    }
+    .shimmer-loading {
+        @apply animate-shimmer;
+        background-image: linear-gradient(
+            to right,
+            transparent,
+            transparent,
+            transparent,
+            #404040 ,
+            transparent,
+            transparent,
+            transparent
+        );
+        background-size: 300% 100%;
+        background-position-x: left;
     }
 }

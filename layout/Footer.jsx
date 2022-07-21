@@ -1,8 +1,5 @@
-
 const Footer = () => {
-  return (
-    <div>Footer</div>
-  )
+    return <div className='border-t py-10'>Footer</div>
 }
 
 export default Footer

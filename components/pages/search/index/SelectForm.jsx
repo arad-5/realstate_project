@@ -1,7 +1,6 @@
-import { useEffect } from 'react';
-import { useFilters } from '../../context/search/FiltersProvider';
+import { useFilters } from '../../../../context/search/FiltersProvider';
 
-import { useSelectedFiltersSlug } from '../../context/search/SelectedFiltersSlugProvider';
+import { useSelectedFiltersSlug } from '../../../../context/search/SelectedFiltersSlugProvider';
 
 const SelectForm = ({ filterIndex }) => {
     const { filters } = useFilters();
