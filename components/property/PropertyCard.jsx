@@ -5,17 +5,18 @@ import { MdCalendarViewMonth, MdVerified } from 'react-icons/md'
 import { IoLocationSharp } from 'react-icons/io5'
 import { useEffect } from 'react'
 import Badge from '../Badge'
+import placeholdeImage from '../../public/images/rent-banner.jpg'
 // components
 import PropertyAgencyLogoBadge from '../agency/PropertyAgencyLogoBadge'
 
 const PropertyCard = ({ property: { coverPhoto, price, rooms, title, baths, area, agency, isVerified, externalID, location, purpose } }) => {
     return (
         <Link href={`/property?id=${externalID}`} passHref>
-            <div className='property-card relative z-10 cursor-pointer rounded-xl border bg-white p-3 transition dark:border-[#404040] dark:bg-[#202020] sm:mt-20 sm:rounded-2xl sm:shadow-lg sm:hover:-translate-y-3 sm:hover:shadow-xl'>
+            <div className='property-card relative z-10 cursor-pointer rounded-xl bg-white p-3 transition dark:bg-[#202020] sm:mt-20 sm:rounded-2xl sm:shadow-lg sm:hover:-translate-y-3 sm:hover:shadow-xl'>
                 <div className='flex justify-between sm:block'>
-                    <div className='property-card-image shimmer-loading relative mb-3 h-28 w-1/2 rounded-2xl transition sm:-mt-20 sm:h-48 sm:w-full'>
+                    <div className='property-card-image relative bg-zinc-500 dark:bg-zinc-800 mb-3 h-28 w-1/2 rounded-2xl transition sm:-mt-20 sm:h-48 sm:w-full'>
                         {coverPhoto && (
-                            <Image src={coverPhoto.url} alt={title} className='h-full w-full rounded-xl object-cover sm:rounded-2xl' layout='fill' quality={1}/>
+                            <Image src={coverPhoto.url} placeholder={'blur'} blurDataURL={placeholdeImage} alt={title} className='h-full w-full rounded-xl object-cover sm:rounded-2xl' layout='fill' quality={1}/>
                         )}
                     </div>
                     <div className='relative h-12 w-1/2 overflow-hidden sm:w-full'>

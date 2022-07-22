@@ -16,6 +16,9 @@ module.exports = {
             animation: {
                 shimmer: 'shimmer 3000ms ease infinite',
             },
+            fontFamily: {
+                hanson: 'hanson , sans-serif',
+            },
         },
     },
     plugins: [],

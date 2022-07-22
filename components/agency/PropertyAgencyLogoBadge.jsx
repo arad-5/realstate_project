@@ -3,13 +3,13 @@ import Image from 'next/image'
 
 const PropertyAgencyLogoBadge = ({ agency, isVerified }) => {
     return (
-        <div className='property-badge flex items-center rounded-full border px-2 py-1 transition duration-1000 dark:border-[#404040]'>
+        <div className='flex items-center'>
             <Image
                 src={agency?.logo?.url}
                 width='30'
                 height='30'
                 alt={agency?.name}
-                className='block rounded-full bg-white object-contain object-left'
+                className='block rounded-full dark:bg-white bg-black object-contain object-left'
                 loading={'lazy'}
             />
             {isVerified && <MdVerified className='ml-2 text-xl text-green-400' />}

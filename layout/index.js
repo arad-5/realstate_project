@@ -4,7 +4,7 @@ const index = ({ children }) => {
     return (
         <div className=''>
             <Navbar />
-            <main className='container mx-auto min-h-screen px-2 sm:px-14'>{children}</main>
+            <main className='container mx-auto px-2 sm:px-14'>{children}</main>
             <Footer />
         </div>
     )

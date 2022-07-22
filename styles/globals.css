@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+    @font-face {
+        font-family: 'hanson';
+        src: url('/Hanson-Bold.woff2') format('woff2');
+    }
     html.dark body {
         @apply bg-neutral-900 text-white;
     }
@@ -25,16 +29,7 @@
     }
     .shimmer-loading {
         @apply animate-shimmer;
-        background-image: linear-gradient(
-            to right,
-            transparent,
-            transparent,
-            transparent,
-            #404040 ,
-            transparent,
-            transparent,
-            transparent
-        );
+        background-image: linear-gradient(to right, transparent, transparent, transparent, #404040, transparent, transparent, transparent);
         background-size: 300% 100%;
         background-position-x: left;
     }
