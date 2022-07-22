@@ -4,6 +4,7 @@ import { copyrightImage } from '../public/images/copyright_image.webp'
 import {FiChevronRight} from 'react-icons/fi'
 
 const Footer = () => {
+    
     return (
         <footer className='container mx-auto flex items-center justify-center space-x-2 py-10 font-hanson sm:px-10'>
             <Link href='https://arad.vercel.app/' passHref>
