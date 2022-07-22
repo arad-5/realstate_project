@@ -9,7 +9,7 @@ const PropertyAgencyLogoBadge = ({ agency, isVerified }) => {
                 width='30'
                 height='30'
                 alt={agency?.name}
-                className='block rounded-full dark:bg-white bg-black object-contain object-left'
+                className='block rounded-full dark:bg-neutral-800 bg-neutral-200 object-contain object-left'
                 loading={'lazy'}
             />
             {isVerified && <MdVerified className='ml-2 text-xl text-green-400' />}

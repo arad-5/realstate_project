@@ -12,9 +12,9 @@ import PropertyAgencyLogoBadge from '../agency/PropertyAgencyLogoBadge'
 const PropertyCard = ({ property: { coverPhoto, price, rooms, title, baths, area, agency, isVerified, externalID, location, purpose } }) => {
     return (
         <Link href={`/property?id=${externalID}`} passHref>
-            <div className='property-card relative z-10 cursor-pointer border-b border-neutral-300 p-3 py-6 transition dark:border-neutral-500 dark:bg-[#202020] sm:mt-20 sm:rounded-2xl sm:border-0 sm:shadow-lg sm:hover:-translate-y-3 sm:hover:shadow-xl'>
+            <div className='property-card relative z-10 cursor-pointer border-b p-3 py-6 transition dark:border-neutral-700 last:border-b-0 dark:bg-[#202020] sm:mt-20 sm:rounded-2xl sm:border-0 sm:shadow-lg sm:hover:-translate-y-3 sm:hover:shadow-xl'>
                 <div className='flex justify-between sm:block'>
-                    <div className='property-card-image relative mb-3 h-28 w-1/2 rounded-2xl bg-zinc-200 transition dark:bg-zinc-800 sm:-mt-20 sm:h-48 sm:w-full'>
+                    <div className='property-card-image relative mb-3 h-28 w-1/2 rounded-2xl bg-neutral-200 transition dark:bg-neutral-800 sm:-mt-20 sm:h-48 sm:w-full'>
                         {coverPhoto && (
                             <Image
                                 src={coverPhoto.url}
@@ -42,17 +42,17 @@ const PropertyCard = ({ property: { coverPhoto, price, rooms, title, baths, area
                             <MdCalendarViewMonth className='mr-2' />
                             {Math.round(area)} m<sup>2</sup>
                         </Badge>
-                        <Badge className='property-badge transition-shadow duration-200'>
+                        <Badge className='property-badge'>
                             <FaBed className='mr-2' />
                             {rooms}
                         </Badge>
-                        <Badge className='property-badge duration-300'>
+                        <Badge className='property-badge'>
                             <FaBath className='mr-2' />
                             {baths}
                         </Badge>
                     </div>
                 </div>
-                <div className='text-md flex items-center justify-between overflow-hidden border-t pt-2 dark:border-[#404040]'>
+                <div className='text-md flex items-center justify-between overflow-hidden sm:border-t pt-2 dark:border-[#404040]'>
                     <div className='flex items-center'>
                         <Badge
                             className={`property-badge property-purpose-badge left-6 top-8 border-0 font-hanson transition duration-700 sm:absolute sm:-mt-20 ${
