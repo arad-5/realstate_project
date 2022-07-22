@@ -4,7 +4,7 @@
 
 @layer base {
     html.dark body {
-        @apply bg-neutral-900 text-white transition-colors;
+        @apply bg-neutral-900 text-white;
     }
     li {
         margin: 0;
