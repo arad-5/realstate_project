@@ -12,14 +12,20 @@ import PropertyAgencyLogoBadge from '../agency/PropertyAgencyLogoBadge'
 const PropertyCard = ({ property: { coverPhoto, price, rooms, title, baths, area, agency, isVerified, externalID, location, purpose } }) => {
     return (
         <Link href={`/property?id=${externalID}`} passHref>
-            <div className='property-card relative z-10 cursor-pointer rounded-xl bg-white p-3 transition dark:bg-[#202020] sm:mt-20 sm:rounded-2xl sm:shadow-lg sm:hover:-translate-y-3 sm:hover:shadow-xl'>
+            <div className='property-card relative z-10 cursor-pointer border-b border-neutral-300 p-3 py-6 transition dark:border-neutral-500 dark:bg-[#202020] sm:mt-20 sm:rounded-2xl sm:border-0 sm:shadow-lg sm:hover:-translate-y-3 sm:hover:shadow-xl'>
                 <div className='flex justify-between sm:block'>
-                    <div className='property-card-image relative bg-zinc-500 dark:bg-zinc-800 mb-3 h-28 w-1/2 rounded-2xl transition sm:-mt-20 sm:h-48 sm:w-full'>
+                    <div className='property-card-image relative mb-3 h-28 w-1/2 rounded-2xl bg-zinc-200 transition dark:bg-zinc-800 sm:-mt-20 sm:h-48 sm:w-full'>
                         {coverPhoto && (
-                            <Image src={coverPhoto.url} placeholder={'blur'} blurDataURL={placeholdeImage} alt={title} className='h-full w-full rounded-xl object-cover sm:rounded-2xl' layout='fill' quality={1}/>
+                            <Image
+                                src={coverPhoto.url}
+                                alt={title}
+                                className='h-full w-full rounded-xl object-cover sm:rounded-2xl'
+                                layout='fill'
+                                quality={1}
+                            />
                         )}
                     </div>
-                    <div className='relative h-12 w-1/2 overflow-hidden sm:w-full'>
+                    <div className='relative h-14 w-1/2 overflow-hidden text-xl sm:w-full'>
                         <h2 className='px-2'>{title}</h2>
                     </div>
                 </div>
@@ -47,17 +53,17 @@ const PropertyCard = ({ property: { coverPhoto, price, rooms, title, baths, area
                     </div>
                 </div>
                 <div className='text-md flex items-center justify-between overflow-hidden border-t pt-2 dark:border-[#404040]'>
-                    <div className='flex'>
-                        <div className='property-badge mr-2 rounded-full border px-2 py-1 transition-shadow dark:border-[#404040]'>
-                            {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} AED
-                        </div>
+                    <div className='flex items-center'>
                         <Badge
-                            className={`property-badge property-purpose-badge left-6 top-6 border-0  transition duration-700 sm:absolute sm:-mt-20 ${
+                            className={`property-badge property-purpose-badge left-6 top-8 border-0 font-hanson transition duration-700 sm:absolute sm:-mt-20 ${
                                 purpose === 'for-sale' ? 'bg-red-600' : 'bg-yellow-500'
                             } `}
                         >
-                            <b className='text-white'>{purpose === 'for-sale' ? 'SALE' : 'RENT'}</b>
+                            <span className='tracking-wider text-white'>{purpose === 'for-sale' ? 'SALE' : 'RENT'}</span>
                         </Badge>
+                        <div className='ml-2 font-hanson text-neutral-600 dark:text-neutral-200'>
+                            {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}AED
+                        </div>
                     </div>
                     <PropertyAgencyLogoBadge agency={agency} isVerified={isVerified} />
                 </div>
