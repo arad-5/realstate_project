@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { copyrightImage } from '../public/images/copyright_image.webp'
 import {FiChevronRight} from 'react-icons/fi'
 
 const Footer = () => {

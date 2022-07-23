@@ -1,34 +1,24 @@
-import { useFilters } from '../../../../context/search/FiltersProvider';
-import { useSelectedFiltersSlug } from '../../../../context/search/SelectedFiltersSlugProvider';
+import { useFilters } from '../../../../context/search/FiltersProvider'
+import { useRouter } from 'next/router'
 
 const RadioForm = ({ filterIndex }) => {
-    const { filters } = useFilters();
-    const filter = filters[filterIndex];
-    const { setSelectedFiltersSlug } = useSelectedFiltersSlug();
-
+    const { filters } = useFilters()
+    const filter = filters[filterIndex]
+    const router = useRouter()
     return (
         <form
             className='relative flex w-full items-center space-x-2'
-            onChange={(e) => {
-                [...document.querySelectorAll(`[data-radio]`)].forEach(
-                    (element) => {
-                        element.style.backgroundColor = 'transparent';
-                        element.style.color = '#747474';
-                    }
-                );
-                document.querySelector(
-                    `[data-radio='${e.target.value}']`
-                ).style.backgroundColor = e.target.dataset.color;
-                document.querySelector(
-                    `[data-radio='${e.target.value}']`
-                ).style.color = '#fff';
-                setSelectedFiltersSlug(curr => ({
-                    ...curr, 
-                    [filter.slug]: e.target.value
-                }))
+            onChange={e => {
+                ;[...document.querySelectorAll(`[data-radio]`)].forEach(element => {
+                    element.style.backgroundColor = 'transparent'
+                    element.style.color = '#747474'
+                })
+                document.querySelector(`[data-radio='${e.target.value}']`).style.backgroundColor = e.target.dataset.color
+                document.querySelector(`[data-radio='${e.target.value}']`).style.color = '#fff'
+                router.push({ query: { ...router.query, [filter.slug]: e.target.value } })
             }}
         >
-            {filter.options.map((option) => (
+            {filter.options.map(option => (
                 <div
                     key={option.label}
                     className='relative w-full rounded-xl py-2 text-center font-semibold transition-colors'
@@ -45,7 +35,7 @@ const RadioForm = ({ filterIndex }) => {
                 </div>
             ))}
         </form>
-    );
-};
+    )
+}
 
-export default RadioForm;
+export default RadioForm

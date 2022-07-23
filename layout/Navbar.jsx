@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { React } from '@nextui-org/react'
-import {SiEmirates} from 'react-icons/si'
+import { SiEmirates } from 'react-icons/si'
 import { DarkmodeSwitch } from '.'
 import { useRouter } from 'next/router'
 import NavMenu from '../components/layout/navbar/NavMenu'
@@ -36,8 +36,8 @@ const Navbar = () => {
             <div className='container mx-auto flex h-full max-w-7xl items-center justify-between sm:px-14'>
                 <div className='flex items-center'>
                     <Link href='/' passHref>
-                        <div className='absolute flex left-1/2 items-center -translate-x-1/2 cursor-pointer font-hanson leading-3'>
-                        <SiEmirates className='text-3xl' /> Arad <br /> realstate
+                        <div className='absolute h-full left-1/2 flex -translate-x-1/2 cursor-pointer items-center font-hanson leading-3'>
+                            <SiEmirates className='text-3xl' /> Arad <br /> realstate
                         </div>
                     </Link>
                     <DarkmodeSwitch />

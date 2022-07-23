@@ -1,18 +1,13 @@
 import FiltersStatusBar from '../../components/pages/search/result/FiltersStatusBar'
-import PropertyCard from '../../components/property/PropertyCard'
 import { fetchAPI } from '../../utils/fetchAPI'
+import Properties from '../../components/property/Properties'
 
 const results = ({ result }) => {
     return (
-        <section className='py-40'>
+        <section className='py-24'>
             <FiltersStatusBar />
             <div className='relative mb-8 grid gap-3 sm:grid-cols-2 md:gap-5 lg:grid-cols-3 xl:grid-cols-4'>
-                <div className='absolute -top-20 z-10 w-full text-center text-xl'>
-                    <h1 className='inline-block rounded-full border bg-white px-3 py-1 dark:border-0 dark:bg-[#202020]'></h1>
-                </div>
-                {result.map(property => (
-                    <PropertyCard property={property} key={property.id} />
-                ))}
+                <Properties properties={result} />
             </div>
         </section>
     )
