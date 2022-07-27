@@ -62,7 +62,7 @@ const PropertyCard = ({ property: { coverPhoto, price, rooms, title, baths, area
                             <span className='tracking-wider text-white'>{purpose === 'for-sale' ? 'SALE' : 'RENT'}</span>
                         </Badge>
                         <div className='ml-2 font-hanson text-neutral-600 dark:text-neutral-200'>
-                            {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}AED
+                            {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} AED
                         </div>
                     </div>
                     <PropertyAgencyLogoBadge agency={agency} isVerified={isVerified} />

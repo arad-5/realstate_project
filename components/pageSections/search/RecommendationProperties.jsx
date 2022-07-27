@@ -8,7 +8,7 @@ const RecommendationProperties = ({ properties }) => {
                     recommendations
                 </h1>
             </div>
-            <div className='h-full grid-cols-2 md:grid lg:block lg:px-4'>
+            <div className='h-full grid-cols-2 md:grid lg:block gap-y-4 lg:px-4'>
                 {properties.map((property) => (
                     <PropertyCard property={property} key={property.title} />
                 ))}

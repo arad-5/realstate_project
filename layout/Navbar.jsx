@@ -5,9 +5,10 @@ import { SiEmirates } from 'react-icons/si'
 import { DarkmodeSwitch } from '.'
 import { useRouter } from 'next/router'
 import NavMenu from '../components/layout/navbar/NavMenu'
+import FiltersStatusBar from '../components/pages/search/result/FiltersStatusBar'
 
 const Navbar = () => {
-    const { pathname } = useRouter()
+    const { pathname, query } = useRouter()
 
     const [toggleNavbar, setToggleNavbar] = useState()
     const scrollHandler = () => {
@@ -29,14 +30,14 @@ const Navbar = () => {
 
     return (
         <nav
-            className={`fixed left-0 top-0 z-50 h-16 w-screen -translate-y-full border-b bg-white px-6 transition-transform dark:border-black dark:bg-[#171717] ${
+            className={`fixed left-0 top-0 z-50 h-16 w-screen -translate-y-full border-b bg-white px-4 transition-transform dark:border-black dark:bg-[#171717] ${
                 toggleNavbar && 'translate-y-0'
             }`}
         >
             <div className='container mx-auto flex h-full max-w-7xl items-center justify-between sm:px-14'>
                 <div className='flex items-center'>
                     <Link href='/' passHref>
-                        <div className='absolute h-full left-1/2 flex -translate-x-1/2 cursor-pointer items-center font-hanson leading-3'>
+                        <div className='absolute left-1/2 flex h-full -translate-x-1/2 cursor-pointer items-center font-hanson leading-3'>
                             <SiEmirates className='text-3xl' /> Arad <br /> realstate
                         </div>
                     </Link>
@@ -44,6 +45,7 @@ const Navbar = () => {
                 </div>
                 <NavMenu />
             </div>
+            {pathname.includes('search') && Object.keys(query).length ? <FiltersStatusBar /> : ''}
         </nav>
     )
 }

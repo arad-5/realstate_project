@@ -1,12 +1,9 @@
 import { useState } from 'react'
-import { useFilters } from '../../../../context/search/FiltersProvider'
 import { BsCheck } from 'react-icons/bs'
 import { useRouter } from 'next/router'
 
-const CheckBoxForm = ({ filterIndex }) => {
-    const { filters } = useFilters()
+const CheckBoxForm = ({ filter }) => {
     const [checked, setChecked] = useState(false)
-    const filter = filters[filterIndex]
     const router = useRouter()
 
     return (
@@ -14,7 +11,7 @@ const CheckBoxForm = ({ filterIndex }) => {
             className='w-full'
             onChange={e => {
                 setChecked(e.target.checked)
-                router({ query: { ...router.query, [filter.slug]: e.target.checked ? true : '' } })
+                router.push({ query: { ...router.query, [filter.slug]: e.target.checked ? true : '' } })
             }}
         >
             <div

@@ -1,10 +1,8 @@
-import { useFilters } from '../../../../context/search/FiltersProvider'
 import { useRouter } from 'next/router'
 
-const RadioForm = ({ filterIndex }) => {
-    const { filters } = useFilters()
-    const filter = filters[filterIndex]
+const RadioForm = ({ filter }) => {
     const router = useRouter()
+
     return (
         <form
             className='relative flex w-full items-center space-x-2'

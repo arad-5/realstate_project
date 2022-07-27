@@ -4,23 +4,21 @@ import Properties from '../../components/property/Properties'
 
 const results = ({ result }) => {
     return (
-        <section className='py-24'>
-            <FiltersStatusBar />
-            <div className='relative mb-8 grid gap-3 sm:grid-cols-2 md:gap-5 lg:grid-cols-3 xl:grid-cols-4'>
-                <Properties properties={result} />
-            </div>
-        </section>
+        <div className='py-32'>
+            {/* <FiltersStatusBar /> */}
+            <Properties properties={result} />
+        </div>
     )
 }
 
 export default results
 
 export const getServerSideProps = async ({ resolvedUrl }) => {
-    const { hits } = await fetchAPI(`https://bayut.p.rapidapi.com/properties/list?locationExternalIDs=5002%2C6020&${resolvedUrl.split('?')[1]}`)
+    // const { hits } = await fetchAPI(`https://bayut.p.rapidapi.com/properties/list?locationExternalIDs=5002%2C6020&${resolvedUrl.split('?')[1]}`)
 
     return {
         props: {
-            result: hits,
+            result: dummy,
         },
     }
 }

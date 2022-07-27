@@ -1,9 +1,6 @@
 import { useRouter } from 'next/router'
-import { useFilters } from '../../../../context/search/FiltersProvider'
 
-const SelectForm = ({ filterIndex }) => {
-    const { filters } = useFilters()
-    const filter = filters[filterIndex]
+const SelectForm = ({ filter }) => {
     const router = useRouter()
 
     return (

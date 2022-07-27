@@ -1,11 +1,9 @@
-import { useFilters } from '../../../../context/search/FiltersProvider'
 import { useRouter } from 'next/router'
 
-const MinMaxForm = ({ filterIndex }) => {
-    const { filters } = useFilters()
-    const filter = filters[filterIndex]
+const MinMaxForm = ({ filter }) => {
     const router = useRouter()
 
+    console.log(router.query[filter.maximum])
     return (
         <form
             className='relative flex w-full items-center sm:space-y-0 '
@@ -19,6 +17,7 @@ const MinMaxForm = ({ filterIndex }) => {
                     type='number'
                     data-minimum
                     className='h-full w-full cursor-pointer rounded-xl border bg-transparent py-2 pl-2 text-base placeholder:text-center dark:border-zinc-800'
+                    value={router.query[filter.maximum]}
                     min={0}
                 ></input>
             </div>

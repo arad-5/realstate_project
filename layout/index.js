@@ -20,7 +20,7 @@ export const DarkmodeSwitch = () => {
 
     return (
         <Switch
-            className='text-blue-500 dark:text-black'
+            className='text-blue-500  dark:text-black'
             checked={resolvedTheme === 'dark'}
             size='md'
             iconOn={<SunIcon filled='true' />}

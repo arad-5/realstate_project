@@ -5,7 +5,7 @@ import {FiChevronRight} from 'react-icons/fi'
 const Footer = () => {
     
     return (
-        <footer className='container mx-auto flex items-center justify-center space-x-2 py-10 font-hanson sm:px-10'>
+        <footer className='container mx-auto flex items-center justify-center space-x-2 py-4 font-hanson sm:px-10'>
             <Link href='https://arad.vercel.app/' passHref>
                 <div className='flex items-center space-x-2 cursor-pointer hover:bg-neutral-50 dark:hover:bg-neutral-800 transition-colors rounded-full p-4'>
                     <div className='relative h-12 w-12'>
