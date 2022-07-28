@@ -39,14 +39,27 @@ const Property = ({
     const [isContactModalOpen, setIsContactModalOpen] = useState(false)
 
     return (
-        <section className='pt-14 pb-20 sm:pt-20'>
-            <div className='sm:px-20'>
+        <section className='pt-10 pb-40'>
+            <div className='grid-cols-1 grid-rows-2 gap-4 space-y-4 lg:grid lg:grid-cols-2 lg:space-y-0'>
                 <div>
                     <div>
-                        <div className='h-72 rounded-2xl sm:h-[50vh]'>
+                        <div className='h-80 rounded-2xl sm:h-[50vh] dark:bg-white bg-neutral-700'>
                             <PaginationSwiper images={photos} alt={title} />
                         </div>
-                        <div className='my-2 flex justify-between space-x-2 sm:justify-start'>
+                    </div>
+                </div>
+
+                <div className='space-y-4 lg:row-span-2'>
+                    <div className='inline-block space-y-4'>
+                        <h1 className='text-2xl font-semibold'>{title}</h1>
+                        <div className='stems-start mt-2 flex h-6 w-full overflow-hidden leading-5'>
+                            <IoLocationSharp className='h-5 w-5 flex-shrink-0 text-xl text-blue-600' />
+                            {location
+                                .slice(1)
+                                .map(location => location.name)
+                                .join(', ')}
+                        </div>
+                        <div className='flex justify-between'>
                             {active && (
                                 <span className='animate-pulse rounded-full bg-green-500 px-4 py-1 font-bold leading-8 text-white dark:bg-green-900 dark:text-green-200'>
                                     active
@@ -54,58 +67,58 @@ const Property = ({
                             )}
                             <PropertyAgencyLogoBadge agency={agency} isVerified={isVerified} />
                         </div>
-                    </div>
-                    <div className='fixed bottom-0 left-0 z-40 w-screen space-y-1 border-t bg-white/70 px-2 backdrop-blur-sm dark:border-[#404040] dark:bg-[#151515]/70 sm:static sm:flex sm:w-auto sm:space-y-0 sm:border-2 sm:py-2 sm:px-0'>
-                        <div className='w-full items-center justify-between space-y-2 sm:flex'>
-                            <div className='flex flex-wrap space-x-2 border text-lg'>
-                                <Badge>{price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} AED</Badge>
-                                <Badge className={`absolute -top-10 left-0 sm:static ${purpose === 'for-sale' ? 'bg-red-600' : 'bg-yellow-500'}`}>
-                                    <b className='text-white'> {purpose === 'for-sale' ? 'SALE' : 'RENT'}</b>
-                                </Badge>
-                                <Badge>
-                                    <MdCalendarViewMonth className='mr-2' />
-                                    {Math.round(area)} m<sup>2</sup>
-                                </Badge>
-                                <Badge>
-                                    <FaBed className='mr-2' />
-                                    {rooms}
-                                </Badge>
-                                <Badge>
-                                    <FaBath className='mr-2' />
-                                    {baths}
-                                </Badge>
+                        <div className='fixed bottom-0 left-0 z-40 w-screen space-y-1 border-t sm:border-t-0 bg-white/70 px-2 backdrop-blur-sm dark:border-[#404040] dark:bg-[#151515]/70 sm:static sm:flex sm:w-auto sm:space-y-0 sm:px-0'>
+                            <div className='w-full items-start justify-between sm:flex py-2 sm:py-0'>
+                                <div className='text-base mb-2 sm:mb-0 sm:space-y-2'>
+                                    <div className='absolute -top-10 left-2 space-x-2 font-hanson sm:static'>
+                                        <Badge className='bg-white dark:bg-[#171717]'>
+                                            {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} AED
+                                        </Badge>
+                                        <Badge className={`border-0 ${purpose === 'for-sale' ? 'bg-red-600' : 'bg-yellow-500'}`}>
+                                            <b className='text-white'> {purpose === 'for-sale' ? 'SALE' : 'RENT'}</b>
+                                        </Badge>
+                                    </div>
+                                    <Badge>
+                                        <MdCalendarViewMonth className='mr-2' />
+                                        {Math.round(area)} m<sup>2</sup>
+                                    </Badge>
+                                    <Badge>
+                                        <FaBed className='mr-2' />
+                                        {rooms}
+                                    </Badge>
+                                    <Badge>
+                                        <FaBath className='mr-2' />
+                                        {baths}
+                                    </Badge>
+                                </div>
+                                <PrimaryButton
+                                    className='flex w-full items-center justify-center sm:w-auto'
+                                    onClick={() => setIsContactModalOpen(true)}
+                                >
+                                    contact
+                                    <IoCall className='ml-2' />
+                                </PrimaryButton>
                             </div>
-                            <PrimaryButton className='flex items-center justify-center sm:w-auto' onClick={() => setIsContactModalOpen(true)}>
-                                contact
-                                <IoCall className='ml-2' />
-                            </PrimaryButton>
+                        </div>
+                        <div className='first-letter rounded-2xl border p-4 dark:border-[#404040]'>
+                            <p>{parse(description)}</p>
                         </div>
                     </div>
-                </div>
-                <div className='inline-block'>
-                    <h1 className='text-2xl'>{title}</h1>
-                    <div className='stems-start mt-2 flex h-6 w-full overflow-hidden leading-5'>
-                        <IoLocationSharp className='h-5 w-5 flex-shrink-0 text-xl text-blue-600' />
-                        {location
-                            .slice(1)
-                            .map(location => location.name)
-                            .join(', ')}
+                    <div className='col-start-1 border-t pt-4 dark:border-[#404040]'>
+                        <ul className='space-x-2'>
+                            {category.map(categoryItem => (
+                                <li
+                                    className='inline-block rounded-full border px-3 py-1 text-blue-500 dark:border-[#404040]'
+                                    key={categoryItem.slug}
+                                >
+                                    #<h4 className='inline'>{categoryItem.name}</h4>
+                                </li>
+                            ))}
+                        </ul>
                     </div>
-                    <div className='first-letter my-2 rounded-2xl border p-4 dark:border-[#404040]'>
-                        <p>{parse(description)}</p>
-                    </div>
                 </div>
-                <div className='col-start-1 border-t pt-3 dark:border-[#404040]'>
-                    <ul className='space-x-2'>
-                        {category.map(categoryItem => (
-                            <li className='inline-block rounded-full border px-3 py-1 text-blue-500 dark:border-[#404040]' key={categoryItem.slug}>
-                                #<h4 className='inline'>{categoryItem.name}</h4>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-                <div className='h-[50vh] w-full'>
-                    {geography.lat && geography.lng && (
+                {geography.lat && geography.lng && (
+                    <div className='col-start-1 row-span-1 row-start-3 h-[50vh] w-full overflow-hidden rounded-2xl lg:row-start-2'>
                         <GoogleMapReact
                             defaultCenter={{
                                 lat: geography.lat,
@@ -117,17 +130,16 @@ const Property = ({
                                 <IoLocationSharp className=' h-full w-full -translate-y-2 text-base text-blue-600' />
                             </div>
                         </GoogleMapReact>
-                    )}
-                </div>
-                <ContactModal
-                    contact={''}
-                    isContactModalOpen={isContactModalOpen}
-                    setIsContactModalOpen={setIsContactModalOpen}
-                    phoneNumber={phoneNumber}
-                    contactName={contactName}
-                    agencyBadge={<PropertyAgencyLogoBadge agency={agency} isVerified={isVerified} />}
-                />
+                    </div>
+                )}
             </div>
+            <ContactModal
+                isContactModalOpen={isContactModalOpen}
+                setIsContactModalOpen={setIsContactModalOpen}
+                phoneNumber={phoneNumber}
+                contactName={contactName}
+                agencyBadge={<PropertyAgencyLogoBadge agency={agency} isVerified={isVerified} />}
+            />
         </section>
     )
 }
@@ -135,11 +147,11 @@ const Property = ({
 export default Property
 
 export const getServerSideProps = async ({ query }) => {
-    const propertyDetail = await fetchAPI(`https://bayut.p.rapidapi.com/properties/detail?externalID=${query.id}`)
+    // const propertyDetail = await fetchAPI(`https://bayut.p.rapidapi.com/properties/detail?externalID=${query.id}`)
 
     return {
         props: {
-            propertyDetail,
+            propertyDetail: dummy,
         },
     }
 }

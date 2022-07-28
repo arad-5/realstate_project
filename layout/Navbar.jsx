@@ -30,7 +30,7 @@ const Navbar = () => {
 
     return (
         <nav
-            className={`fixed left-0 top-0 z-50 h-16 w-screen -translate-y-full border-b bg-white px-4 transition-transform dark:border-black dark:bg-[#171717] ${
+            className={`sticky left-0 top-0 z-50 h-16 w-screen -translate-y-full border-b bg-white px-4 transition-transform dark:border-black dark:bg-[#171717] ${
                 toggleNavbar && 'translate-y-0'
             }`}
         >

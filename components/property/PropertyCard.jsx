@@ -12,7 +12,7 @@ import PropertyAgencyLogoBadge from '../agency/PropertyAgencyLogoBadge'
 const PropertyCard = ({ property: { coverPhoto, price, rooms, title, baths, area, agency, isVerified, externalID, location, purpose } }) => {
     return (
         <Link href={`/property?id=${externalID}`} passHref>
-            <div className='property-card relative z-10 cursor-pointer border-b p-3 py-6 transition dark:border-neutral-700 last:border-b-0 dark:bg-[#202020] sm:mt-20 sm:rounded-2xl sm:border-0 sm:shadow-lg sm:hover:-translate-y-3 sm:hover:shadow-xl'>
+            <div className='property-card relative z-10 cursor-pointer border-b p-3 py-6 dark:border-neutral-700 last:border-b-0 dark:bg-[#202020] sm:mt-20 sm:rounded-2xl sm:border-0 sm:shadow-lg sm:hover:-translate-y-3 sm:hover:shadow-xl'>
                 <div className='flex justify-between sm:block'>
                     <div className='property-card-image relative mb-3 h-28 w-1/2 rounded-2xl bg-neutral-200 transition dark:bg-neutral-800 sm:-mt-20 sm:h-48 sm:w-full'>
                         {coverPhoto && (

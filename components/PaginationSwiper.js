@@ -14,19 +14,18 @@ const PaginationSwiper = ({ images, alt }) => {
             slidesPerView={1}
             // onSwiper={(swiper) => console.log(swiper)}
             // onSlideChange={() => console.log('slide change')}
-            className='relative h-full cursor-grab'
+            className='relative h-full cursor-grab rounded-2xl '
         >
             {images.map(photo => (
-                <SwiperSlide key={photo.id}>
-                    <div className='flex h-full'>
+                <SwiperSlide key={photo.id} className='relative'>
+                    <div className='flex'>
                         <div className='m-auto'>
                             <Loading size='lg' />
                         </div>
-                        <Image src={photo.url} layout='fill' alt={alt} objectFit='contain' />
+                        <Image src={photo.url} layout='fill' alt={alt} className='object-cover' />
                     </div>
                 </SwiperSlide>
             ))}
-            <div className='absolute bottom-1 left-1/2 h-5 w-28 -translate-x-1/2 rounded-full border bg-white'></div>
         </Swiper>
     )
 }
