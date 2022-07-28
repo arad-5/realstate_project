@@ -14,11 +14,11 @@ const results = ({ result }) => {
 export default results
 
 export const getServerSideProps = async ({ resolvedUrl }) => {
-    // const { hits } = await fetchAPI(`https://bayut.p.rapidapi.com/properties/list?locationExternalIDs=5002%2C6020&${resolvedUrl.split('?')[1]}`)
+     const { hits } = await fetchAPI(`https://bayut.p.rapidapi.com/properties/list?locationExternalIDs=5002%2C6020&${resolvedUrl.split('?')[1]}`)
 
     return {
         props: {
-            result: dummy,
+            result: hits,
         },
     }
 }
