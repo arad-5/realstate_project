@@ -6,7 +6,7 @@ import Properties from '../components/property/Properties'
 import PrimaryButton from '../components/buttons/PrimaryButton'
 
 export default function Home({ propertiesForSale, propertiesForRent }) {
-    console.log(propertiesForSale, propertiesForRent)
+ 
     return (
         <div className='space-y-16 -mt-16'>
             <Intro />
