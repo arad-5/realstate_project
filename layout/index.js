@@ -1,11 +1,16 @@
 import Footer from './Footer'
 import Navbar from './Navbar'
+import Router from 'next/router'
+
 const index = ({ children }) => {
+    const { pathname } = Router.useRouter()
+    console.log(pathname)
+
     return (
         <div className=''>
             <Navbar />
             <main className='container mx-auto px-2 sm:px-14'>{children}</main>
-            <Footer />
+            {pathname !== '/property' ? <Footer /> : ''}
         </div>
     )
 }

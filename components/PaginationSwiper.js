@@ -17,12 +17,12 @@ const PaginationSwiper = ({ images, alt }) => {
             className='relative h-full cursor-grab rounded-2xl '
         >
             {images.map(photo => (
-                <SwiperSlide key={photo.id} className='relative'>
-                    <div className='flex'>
+                <SwiperSlide key={photo.id} >
+                    <div className='flex h-full'>
                         <div className='m-auto'>
                             <Loading size='lg' />
                         </div>
-                        <Image src={photo.url} layout='fill' alt={alt} className='object-cover' />
+                        {/* <Image src={photo.url} layout='fill' alt={alt} className='object-cover' /> */}
                     </div>
                 </SwiperSlide>
             ))}

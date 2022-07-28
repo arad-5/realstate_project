@@ -43,7 +43,7 @@ const Property = ({
             <div className='grid-cols-1 grid-rows-2 gap-4 space-y-4 lg:grid lg:grid-cols-2 lg:space-y-0'>
                 <div>
                     <div>
-                        <div className='h-80 rounded-2xl sm:h-[50vh] dark:bg-white bg-neutral-700'>
+                        <div className='h-80 rounded-2xl border dark:border-0 dark:bg-white sm:h-[50vh]'>
                             <PaginationSwiper images={photos} alt={title} />
                         </div>
                     </div>
@@ -67,14 +67,14 @@ const Property = ({
                             )}
                             <PropertyAgencyLogoBadge agency={agency} isVerified={isVerified} />
                         </div>
-                        <div className='fixed bottom-0 left-0 z-40 w-screen space-y-1 border-t sm:border-t-0 bg-white/70 px-2 backdrop-blur-sm dark:border-[#404040] dark:bg-[#151515]/70 sm:static sm:flex sm:w-auto sm:space-y-0 sm:px-0'>
-                            <div className='w-full items-start justify-between sm:flex py-2 sm:py-0'>
-                                <div className='text-base mb-2 sm:mb-0 sm:space-y-2'>
+                        <div className='fixed bottom-0 left-0 z-40 w-screen space-y-1 border-t bg-white/70 px-2 backdrop-blur-sm dark:border-[#404040] dark:bg-[#151515]/70 sm:static sm:flex sm:w-auto sm:space-y-0 sm:border-t-0 sm:px-0'>
+                            <div className='w-full items-start justify-between py-2 sm:flex sm:py-0'>
+                                <div className='mb-2 text-base sm:mb-0 sm:space-y-2'>
                                     <div className='absolute -top-10 left-2 space-x-2 font-hanson sm:static'>
                                         <Badge className='bg-white dark:bg-[#171717]'>
                                             {price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} AED
                                         </Badge>
-                                        <Badge className={`border-0 ${purpose === 'for-sale' ? 'bg-red-600' : 'bg-yellow-500'}`}>
+                                        <Badge className={`${purpose === 'for-sale' ? 'bg-red-600' : 'bg-yellow-500'}`}>
                                             <b className='text-white'> {purpose === 'for-sale' ? 'SALE' : 'RENT'}</b>
                                         </Badge>
                                     </div>
