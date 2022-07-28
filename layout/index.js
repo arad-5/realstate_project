@@ -1,6 +1,7 @@
 import Footer from './Footer'
 import Navbar from './Navbar'
 import Router from 'next/router'
+import RouteChangeLoading from './RouteChangeLoading'
 
 const index = ({ children }) => {
     const { pathname } = Router.useRouter()
@@ -11,6 +12,7 @@ const index = ({ children }) => {
             <Navbar />
             <main className='container mx-auto px-2 sm:px-14'>{children}</main>
             {pathname !== '/property' ? <Footer /> : ''}
+            <RouteChangeLoading />
         </div>
     )
 }

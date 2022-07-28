@@ -147,11 +147,11 @@ const Property = ({
 export default Property
 
 export const getServerSideProps = async ({ query }) => {
-    // const propertyDetail = await fetchAPI(`https://bayut.p.rapidapi.com/properties/detail?externalID=${query.id}`)
+    const propertyDetail = await fetchAPI(`https://bayut.p.rapidapi.com/properties/detail?externalID=${query.id}`)
 
     return {
         props: {
-            propertyDetail: dummy,
+            propertyDetail,
         },
     }
 }
