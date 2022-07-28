@@ -1,11 +1,9 @@
-import FiltersStatusBar from '../../components/pages/search/result/FiltersStatusBar'
 import { fetchAPI } from '../../utils/fetchAPI'
 import Properties from '../../components/property/Properties'
 
 const results = ({ result }) => {
     return (
         <div className='py-32'>
-            {/* <FiltersStatusBar /> */}
             <Properties properties={result} />
         </div>
     )
