@@ -9,7 +9,6 @@ import FiltersStatusBar from '../components/pages/search/result/FiltersStatusBar
 
 const Navbar = () => {
     const { pathname, query } = useRouter()
-
     const [toggleNavbar, setToggleNavbar] = useState()
     const scrollHandler = () => {
         if (window.pageYOffset > window.innerHeight / 3) {
@@ -27,6 +26,8 @@ const Navbar = () => {
         }
         return () => window.removeEventListener('scroll', scrollHandler)
     }, [pathname])
+
+    
 
     return (
         <nav

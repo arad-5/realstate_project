@@ -22,7 +22,7 @@ const PaginationSwiper = ({ images, alt }) => {
                         <div className='m-auto'>
                             <Loading size='lg' />
                         </div>
-                        {/* <Image src={photo.url} layout='fill' alt={alt} className='object-cover' /> */}
+                        <Image src={photo.url} layout='fill' alt={alt} className='object-cover' />
                     </div>
                 </SwiperSlide>
             ))}
