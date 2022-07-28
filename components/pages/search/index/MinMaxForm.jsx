@@ -8,7 +8,7 @@ const MinMaxForm = ({ filter }) => {
         <form
             className='relative flex w-full items-center sm:space-y-0 '
             onChange={e =>
-                router.push({ query: { ...router.query, [e.target.dataset?.minimum ? filter.slugs.minimum : filter.slugs.maximum]: e.target.value } })
+                router.push({ query: { ...router.query, [e.target.dataset?.minimum ? filter.slugs.minimum : filter.slugs.maximum]: e.target.value } } , undefined , {scroll: false})
             }
         >
             <div className='relative mr-1 h-full '>

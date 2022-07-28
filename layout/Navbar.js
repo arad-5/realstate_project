@@ -10,11 +10,14 @@ import FiltersStatusBar from '../components/pages/search/result/FiltersStatusBar
 const Navbar = () => {
     const { pathname, query } = useRouter()
     const [toggleNavbar, setToggleNavbar] = useState()
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
+
     const scrollHandler = () => {
         if (window.pageYOffset > window.innerHeight / 3) {
             setToggleNavbar(true)
         } else {
             setToggleNavbar(false)
+            setIsMenuOpen(false)
         }
     }
     useEffect(() => {
@@ -26,8 +29,6 @@ const Navbar = () => {
         }
         return () => window.removeEventListener('scroll', scrollHandler)
     }, [pathname])
-
-    
 
     return (
         <nav
@@ -44,7 +45,7 @@ const Navbar = () => {
                     </Link>
                     <DarkmodeSwitch />
                 </div>
-                <NavMenu />
+                <NavMenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
             </div>
             {pathname.includes('search') && Object.keys(query).length ? <FiltersStatusBar /> : ''}
         </nav>

@@ -13,7 +13,7 @@ const RadioForm = ({ filter }) => {
                 })
                 document.querySelector(`[data-radio='${e.target.value}']`).style.backgroundColor = e.target.dataset.color
                 document.querySelector(`[data-radio='${e.target.value}']`).style.color = '#fff'
-                router.push({ query: { ...router.query, [filter.slug]: e.target.value } })
+                router.push({ query: { ...router.query, [filter.slug]: e.target.value } }, undefined , {scroll: false})
             }}
         >
             {filter.options.map(option => (

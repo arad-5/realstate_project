@@ -1,27 +1,26 @@
-import { useState } from 'react'
 import Link from 'next/link'
 import Router from 'next/router'
 
-const NavMenu = () => {
-    const [menuOpen, setMenuOpen] = useState(false)
-    Router.events.on('routeChangeComplete', () => setMenuOpen(false))
+const NavMenu = ({ isMenuOpen, setIsMenuOpen }) => {
+    Router.events.on('routeChangeStart', () => setIsMenuOpen(false))
+
     return (
         <>
-            <button type='button' className={`relative h-full w-16 lg:hidden`} onClick={() => setMenuOpen(curr => !curr)}>
+            <button type='button' className={`relative h-full w-16 lg:hidden`} onClick={() => setIsMenuOpen(curr => !curr)}>
                 <span
                     className={`absolute top-1/2 left-1/2 block h-[2px] w-7 -translate-x-1/2 bg-[#141414] transition-transform dark:bg-white ${
-                        menuOpen ? 'translate-y-[0px] -rotate-45' : '-translate-y-[5px]'
+                        isMenuOpen ? 'translate-y-[0px] -rotate-45' : '-translate-y-[5px]'
                     }`}
                 ></span>
                 <span
                     className={`absolute bottom-2 top-1/2 left-1/2 block h-[2px] w-7 -translate-x-1/2 bg-[#141414] transition-transform dark:bg-white ${
-                        menuOpen ? 'translate-y-[0px] rotate-45' : 'translate-y-[5px]'
+                        isMenuOpen ? 'translate-y-[0px] rotate-45' : 'translate-y-[5px]'
                     }`}
                 ></span>
             </button>
             <div
                 className={`absolute left-0 top-16 z-50 w-screen origin-top overflow-hidden rounded-b-3xl border-b bg-white/50 pt-5 backdrop-blur-lg transition-transform dark:border-neutral-700 dark:bg-[#171717]/50 lg:static lg:h-full lg:w-auto lg:rounded-none lg:border-0 lg:py-0 ${
-                    menuOpen ? 'scale-y-100' : 'scale-y-0'
+                    isMenuOpen ? 'scale-y-100' : 'scale-y-0'
                 } lg:scale-100`}
             >
                 <ul className='h-full font-hanson tracking-wider lg:flex'>
