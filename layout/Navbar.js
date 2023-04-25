@@ -36,18 +36,26 @@ const Navbar = () => {
                 toggleNavbar && 'translate-y-0'
             }`}
         >
-            <div className='container mx-auto flex h-full max-w-7xl items-center justify-between sm:px-14'>
-                <div className='flex items-center'>
-                    <Link href='/' passHref>
-                        <div className='absolute left-1/2 flex h-full -translate-x-1/2 cursor-pointer items-center font-hanson leading-3'>
-                            <SiEmirates className='text-3xl' /> Arad <br /> realstate
+            <div className="container mx-auto flex h-full max-w-7xl items-center justify-between sm:px-14">
+                <div className="flex items-center">
+                    <Link href="/" passHref>
+                        <div className="absolute left-1/2 flex h-full -translate-x-1/2 cursor-pointer items-center font-hanson leading-3">
+                            <SiEmirates className="text-3xl" /> Arad <br />{' '}
+                            realestate
                         </div>
                     </Link>
                     <DarkmodeSwitch />
                 </div>
-                <NavMenu isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+                <NavMenu
+                    isMenuOpen={isMenuOpen}
+                    setIsMenuOpen={setIsMenuOpen}
+                />
             </div>
-            {pathname.includes('search') && Object.keys(query).length ? <FiltersStatusBar /> : ''}
+            {pathname.includes('search') && Object.keys(query).length ? (
+                <FiltersStatusBar />
+            ) : (
+                ''
+            )}
         </nav>
     )
 }
