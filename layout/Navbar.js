@@ -40,7 +40,7 @@ const Navbar = () => {
                 <div className="flex items-center">
                     <Link href="/" passHref>
                         <div className="absolute left-1/2 flex h-full -translate-x-1/2 cursor-pointer items-center font-hanson leading-3">
-                            <SiEmirates className="text-3xl" /> Arad <br />{' '}
+                            <SiEmirates className="text-3xl" /> Tamlik <br />{' '}
                             realestate
                         </div>
                     </Link>

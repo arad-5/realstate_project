@@ -25,7 +25,7 @@ const Intro = () => {
                         </div>
                         <div className="mb-[5vh]">
                             <h1 className="rounded-xl font-hanson text-[13vw] font-semibold leading-[13vw] sm:mb-5 sm:text-6xl sm:leading-none">
-                                Arad <br /> realestate
+                                Tamlik <br /> realestate
                             </h1>
                             <h2 className="text-xl">
                                 buy/rent realestate from uae{' '}
