@@ -10,7 +10,7 @@ const Intro = () => {
             <div className="relative left-1/2 h-screen w-screen -translate-x-1/2 overflow-y-hidden">
                 <div className="relative right-0 top-0 -z-10 h-2/3 w-full sm:absolute sm:h-full md:w-4/6">
                     <Image
-                        src={'/images/sale-banner.jpg'}
+                        src={'/static/images/sale-banner.jpg'}
                         layout="fill"
                         className="object-cover"
                         alt="properties for sale"

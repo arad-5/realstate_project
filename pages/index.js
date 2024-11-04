@@ -16,7 +16,7 @@ export default function Home({ propertiesForSale, propertiesForRent }) {
             <section className="flex flex-col items-center space-y-2 py-10 md:flex-row md:space-x-4">
                 <div className="relative h-[25vh] max-h-80 w-full flex-shrink-0 md:h-[70vh] md:w-1/2">
                     <Image
-                        src={'/images/rent-banner.jpg'}
+                        src={'/static/images/rent-banner.jpg'}
                         layout="fill"
                         className="rounded-full object-cover"
                         alt="properties for sale"
